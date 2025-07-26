@@ -6,8 +6,8 @@ import org.keyla.core.interfaces.PlatformService
 import org.keyla.ui.AppMode
 
 class ApplicationLauncher(
-    private val configurationStorage: ConfigurationStorage,
-    private val platformService: PlatformService
+    configurationStorage: ConfigurationStorage,
+    platformService: PlatformService
 ) {
     private val container = ApplicationContainer(
         configurationStorage,
@@ -41,21 +41,11 @@ class ApplicationLauncher(
     }
     
     private fun launchMainApplication(mode: AppMode) {
-        val modeName = when (mode) {
-            AppMode.Test -> "Typing Test"
-            AppMode.Config -> "Configuration"
-            AppMode.Settings -> "Settings"
-            AppMode.Stats -> "Statistics"
-            AppMode.History -> "Test History"
-            AppMode.Profile -> "Profile Management"
-        }
-        
         try {
             val application = container.getApplication()
             application.run(mode)
         } catch (e: Exception) {
             println("Error: ${e.message}")
-            e.printStackTrace()
         }
     }
     
