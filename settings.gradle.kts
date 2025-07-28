@@ -5,9 +5,9 @@ plugins {
     id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.27"
 }
 
-//gitHooks {
+// gitHooks {
 //    commitMsg {
 //        conventionalCommits { } // Only feat and fix
 //    }
 //    createHooks()
-//}
+// }
