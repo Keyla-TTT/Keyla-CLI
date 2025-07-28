@@ -1,0 +1,53 @@
+name: Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Generate Documentation
+        run: ./gradlew dokkaHtml
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup NPM
+        run: |
+          npm install -g npm@latest
+          npm install -g semantic-release@latest
+          npm install -g @semantic-release/git @semantic-release/changelog @semantic-release/github semantic-release-preconfigured-conventional-commits
+
+      - name: Semantic Release
+        uses: DanySK/action-semantic-release-preconfigured-conventional-commits@0.6.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
