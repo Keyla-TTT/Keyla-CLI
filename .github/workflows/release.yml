@@ -34,6 +34,12 @@ jobs:
       - name: Generate Documentation
         run: ./gradlew dokkaHtml
 
+      - name: Prepare artifacts for release
+        run: |
+          mkdir -p artifacts
+          cp build/libs/*.jar artifacts/
+          cp -r build/dokka/html artifacts/docs
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
