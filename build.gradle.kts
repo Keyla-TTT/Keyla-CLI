@@ -15,6 +15,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    "dokkaPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
+}
+
 tasks.register("installGitHooks") {
     description = "Installa i git hooks (pre-commit e commit-msg) compatibili con Windows"
     group = "git hooks"
@@ -105,7 +109,6 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
                 implementation("com.varabyte.kotter:kotter:$kotterVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
