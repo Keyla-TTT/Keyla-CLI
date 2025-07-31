@@ -113,6 +113,10 @@ jobs:
         with:
           path: dist
 
+      - name: Install semantic-release plugins
+        run: |
+          npm install --save-dev semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
+
       - name: List downloaded files
         run: ls -R dist
 
