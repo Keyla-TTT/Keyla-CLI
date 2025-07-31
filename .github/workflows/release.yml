@@ -69,15 +69,15 @@ jobs:
         run: |
           mkdir -p dist
           if [[ "${{ runner.os }}" == "Linux" ]]; then
-            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-linux
+            cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-linux
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
             if [[ "${{ runner.arch }}" == "arm64" ]]; then
-              cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
+              cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
             else
-              cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos
+              cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-macos
             fi
           elif [[ "${{ runner.os }}" == "Windows" ]]; then
-            cp build/bin/native/releaseExecutable/Keyla.exe dist/keyla-windows.exe
+            cp build/bin/releaseExecutable/Keyla.exe dist/keyla-windows.exe
           fi
         shell: bash
 
