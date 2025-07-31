@@ -1,0 +1,94 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - *
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, macos-arm64, windows-latest]
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for semantic-release
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Kotlin Native compiler
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: kotlin-native-compiler-${{ runner.os }}-${{ hashFiles('gradle.lockfile') }}
+
+      - name: Build Native Executable
+        run: ./gradlew linkReleaseExecutableNative
+        shell: bash
+
+      - name: Rename binary for upload
+        run: |
+          mkdir -p dist
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-linux
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos
+          elif [[ "${{ runner.os }}" == "macos-arm64" ]]; then
+            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            cp build/bin/native/releaseExecutable/Keyla.exe dist/keyla-windows.exe
+          fi
+        shell: bash
+
+      - name: Upload binaries for semantic-release
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-${{ runner.os }}
+          path: dist/*
+
+  publish:
+    name: Run Semantic Release
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: List downloaded files
+        run: ls -R dist
+
+      - name: Run Semantic Release with assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --extends ./release.config.cjs
