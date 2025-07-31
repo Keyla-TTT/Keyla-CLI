@@ -11,7 +11,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest, macos-13]
+        include:
+          - os: ubuntu-latest
+            arch: linuxX64
+            binary_name: keyla-linux
+          - os: macos-latest
+            arch: macosArm64
+            binary_name: keyla-macos-arm64
+          - os: windows-latest
+            arch: mingwX64
+            binary_name: keyla-windows.exe
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,11 +36,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          
       - name: Install Linux native dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev zlib1g-dev
+          
       - name: Install curl on macOS
         if: runner.os == 'macOS'
         run: |
@@ -47,37 +58,27 @@ jobs:
           path: ~/.konan
           key: kotlin-native-compiler-${{ runner.os }}-${{ hashFiles('gradle.lockfile') }}
 
+      - name: Debug runner info
+        run: |
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner Arch: ${{ runner.arch }}"
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Matrix Arch: ${{ matrix.arch }}"
+          uname -m
+
       - name: Build Native Executable
         run: |
-          if [[ "${{ runner.os }}" == "Linux" ]]; then
-            ./gradlew linkReleaseExecutableLinuxX64
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            if [[ "${{ runner.arch }}" == "arm64" ]]; then
-              ./gradlew linkReleaseExecutableMacosArm64
-            else
-              ./gradlew linkReleaseExecutableMacosX64
-            fi
-          elif [[ "${{ runner.os }}" == "Windows" ]]; then
-            ./gradlew linkReleaseExecutableMingwX64
-          else
-            echo "Unknown OS: ${{ runner.os }}"
-            exit 1
-          fi
+          echo "Building for ${{ matrix.arch }}"
+          ./gradlew linkReleaseExecutable${{ matrix.arch }}
         shell: bash
 
       - name: Rename binary for upload
         run: |
           mkdir -p dist
-          if [[ "${{ runner.os }}" == "Linux" ]]; then
-            cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-linux
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            if [[ "${{ runner.arch }}" == "arm64" ]]; then
-              cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
-            else
-              cp build/bin/releaseExecutable/Keyla.kexe dist/keyla-macos
-            fi
-          elif [[ "${{ runner.os }}" == "Windows" ]]; then
-            cp build/bin/releaseExecutable/Keyla.exe dist/keyla-windows.exe
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            cp build/bin/native/releaseExecutable/Keyla.exe dist/${{ matrix.binary_name }}
+          else
+            cp build/bin/native/releaseExecutable/Keyla.kexe dist/${{ matrix.binary_name }}
           fi
         shell: bash
 
