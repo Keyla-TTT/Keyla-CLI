@@ -35,7 +35,19 @@ jobs:
           key: kotlin-native-compiler-${{ runner.os }}-${{ hashFiles('gradle.lockfile') }}
 
       - name: Build Native Executable
-        run: ./gradlew linkReleaseExecutableNative
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            ./gradlew linkReleaseExecutableLinuxX64
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            ./gradlew linkReleaseExecutableMacosX64
+          elif [[ "${{ runner.os }}" == "macos-arm64" ]]; then
+            ./gradlew linkReleaseExecutableMacosArm64
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            ./gradlew linkReleaseExecutableMingwX64
+          else
+            echo "Unknown OS: ${{ runner.os }}"
+            exit 1
+          fi
         shell: bash
 
       - name: Rename binary for upload
