@@ -33,13 +33,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev zlib1g-dev
       - name: Install curl on macOS
-        if: runner.os == 'macOS' || runner.os == 'macos-arm64'
+        if: runner.os == 'macOS'
         run: |
           brew install curl
-          export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
-          export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-          export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-          export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+          echo "PKG_CONFIG_PATH=/opt/homebrew/opt/curl/lib/pkgconfig" >> $GITHUB_ENV
+          echo "LDFLAGS=-L/opt/homebrew/opt/curl/lib" >> $GITHUB_ENV
+          echo "CPPFLAGS=-I/opt/homebrew/opt/curl/include" >> $GITHUB_ENV
+          echo "PATH=/opt/homebrew/opt/curl/bin:$PATH" >> $GITHUB_ENV
 
       - name: Cache Kotlin Native compiler
         uses: actions/cache@v4
@@ -52,9 +52,11 @@ jobs:
           if [[ "${{ runner.os }}" == "Linux" ]]; then
             ./gradlew linkReleaseExecutableLinuxX64
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            ./gradlew linkReleaseExecutableMacosX64
-          elif [[ "${{ runner.os }}" == "macos-arm64" ]]; then
-            ./gradlew linkReleaseExecutableMacosArm64
+            if [[ "${{ runner.arch }}" == "arm64" ]]; then
+              ./gradlew linkReleaseExecutableMacosArm64
+            else
+              ./gradlew linkReleaseExecutableMacosX64
+            fi
           elif [[ "${{ runner.os }}" == "Windows" ]]; then
             ./gradlew linkReleaseExecutableMingwX64
           else
@@ -69,9 +71,11 @@ jobs:
           if [[ "${{ runner.os }}" == "Linux" ]]; then
             cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-linux
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos
-          elif [[ "${{ runner.os }}" == "macos-arm64" ]]; then
-            cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
+            if [[ "${{ runner.arch }}" == "arm64" ]]; then
+              cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos-arm64
+            else
+              cp build/bin/native/releaseExecutable/Keyla.kexe dist/keyla-macos
+            fi
           elif [[ "${{ runner.os }}" == "Windows" ]]; then
             cp build/bin/native/releaseExecutable/Keyla.exe dist/keyla-windows.exe
           fi
