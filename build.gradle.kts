@@ -39,13 +39,13 @@ kotlin {
             }
         }
     }
-    macosArm64 {
-        compilations.getByName("main") {
-            cinterops.create("libcurl") {
-                defFile(project.file("src/nativeInterop/cinterop/libcurl.def"))
-            }
-        }
-    }
+//    macosArm64 {
+//        compilations.getByName("main") {
+//            cinterops.create("libcurl") {
+//                defFile(project.file("src/nativeInterop/cinterop/libcurl.def"))
+//            }
+//        }
+//    }
 
     sourceSets {
         val ktorVersion = "2.3.7"
