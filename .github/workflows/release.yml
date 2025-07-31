@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest, macos-13]
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,6 +32,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev zlib1g-dev
+      - name: Install curl on macOS
+        if: runner.os == 'macOS' || runner.os == 'macos-arm64'
+        run: |
+          brew install curl
+          export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
+          export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+          export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+          export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
       - name: Cache Kotlin Native compiler
         uses: actions/cache@v4
