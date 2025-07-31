@@ -14,7 +14,6 @@ fun main(args: Array<String>) {
             configurationStorage,
             platformService
         )
-        
         launcher.launch(args)
     } catch (e: Exception) {
         val errorMessage = e.message ?: "Unknown error occurred"
