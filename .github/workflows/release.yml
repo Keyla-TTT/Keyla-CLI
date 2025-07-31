@@ -29,7 +29,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: npm i
 
       - name: Cache Kotlin Native compiler
         uses: actions/cache@v4
