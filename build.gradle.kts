@@ -28,6 +28,7 @@ kotlin {
             binaries {
                 executable {
                     entryPoint = "org.keyla.main" // Point to the main function
+                    baseName = "Keyla"
                 }
             }
         }
