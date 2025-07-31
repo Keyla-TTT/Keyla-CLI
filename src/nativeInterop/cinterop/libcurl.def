@@ -1,3 +1,0 @@
-headers = curl/curl.h
-compilerOpts = -I/opt/homebrew/opt/curl/include
-linkerOpts = -L/opt/homebrew/opt/curl/lib -lcurl
