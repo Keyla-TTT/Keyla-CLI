@@ -5,7 +5,7 @@ import platform.posix.*
 
 @OptIn(ExperimentalForeignApi::class)
 actual fun exitProcess(code: Int): Nothing {
-    exit(code.toUInt())
+    exit(code)
     throw IllegalStateException("Should never reach here")
 }
 
