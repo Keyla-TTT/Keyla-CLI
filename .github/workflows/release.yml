@@ -15,12 +15,15 @@ jobs:
           - os: ubuntu-latest
             arch: linuxX64
             binary_name: keyla-linux
+            platform_path: linuxX64
           - os: macos-latest
             arch: macosArm64
             binary_name: keyla-macos-arm64
+            platform_path: macosArm64
           - os: windows-latest
             arch: mingwX64
             binary_name: keyla-windows.exe
+            platform_path: mingwX64
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,6 +67,7 @@ jobs:
           echo "Runner Arch: ${{ runner.arch }}"
           echo "Runner Name: ${{ runner.name }}"
           echo "Matrix Arch: ${{ matrix.arch }}"
+          echo "Platform Path: ${{ matrix.platform_path }}"
           uname -m
 
       - name: Build Native Executable
@@ -76,9 +80,9 @@ jobs:
         run: |
           mkdir -p dist
           if [[ "${{ runner.os }}" == "Windows" ]]; then
-            cp build/bin/releaseExecutable/Keyla.exe dist/${{ matrix.binary_name }}
+            cp build/bin/${{ matrix.platform_path }}/releaseExecutable/Keyla.exe dist/${{ matrix.binary_name }}
           else
-            cp build/bin/releaseExecutable/Keyla.kexe dist/${{ matrix.binary_name }}
+            cp build/bin/${{ matrix.platform_path }}/releaseExecutable/Keyla.kexe dist/${{ matrix.binary_name }}
           fi
         shell: bash
 
