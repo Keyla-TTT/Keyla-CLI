@@ -13,7 +13,7 @@ import kotlinx.cinterop.ptr
 @OptIn(ExperimentalForeignApi::class)
 class MacosPlatformService : PlatformService {
     override fun exitProcess(code: Int): Nothing {
-        exit(code.toUInt())
+        exit(code)
         throw IllegalStateException("Should never reach here")
     }
     
