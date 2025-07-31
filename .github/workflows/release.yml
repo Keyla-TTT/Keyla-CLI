@@ -76,9 +76,9 @@ jobs:
         run: |
           mkdir -p dist
           if [[ "${{ runner.os }}" == "Windows" ]]; then
-            cp build/bin/native/releaseExecutable/Keyla.exe dist/${{ matrix.binary_name }}
+            cp build/bin/releaseExecutable/Keyla.exe dist/${{ matrix.binary_name }}
           else
-            cp build/bin/native/releaseExecutable/Keyla.kexe dist/${{ matrix.binary_name }}
+            cp build/bin/releaseExecutable/Keyla.kexe dist/${{ matrix.binary_name }}
           fi
         shell: bash
 
