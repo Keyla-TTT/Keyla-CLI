@@ -1,0 +1,85 @@
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m3[90m:1:[0m Wildcard import [90m(standard:no-wildcard-imports)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m4[90m:1:[0m Wildcard import [90m(standard:no-wildcard-imports)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m5[90m:1:[0m Wildcard import [90m(standard:no-wildcard-imports)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m6[90m:1:[0m Wildcard import [90m(standard:no-wildcard-imports)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m12[90m:18:[0m A multiline expression should start on a new line [90m(standard:multiline-expression-wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m12[90m:18:[0m Missing newline after "(" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m16[90m:13:[0m Missing newline before ")" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m18[90m:1:[0m Unexpected blank line(s) before "}" [90m(standard:no-blank-line-before-rbrace)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\api\[0mApiClient.kt[90m:[0m20[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m10[90m:37:[0m Missing trailing comma before ")" [90m(standard:trailing-comma-on-declaration-site)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m12[90m:29:[0m A multiline expression should start on a new line [90m(standard:multiline-expression-wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m14[90m:24:[0m Missing trailing comma before ")" [90m(standard:trailing-comma-on-call-site)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m16[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m17[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m42[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m43[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m51[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m52[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mApplicationLauncher.kt[90m:[0m64[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m10[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m13[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m14[90m:20:[0m A multiline expression should start on a new line [90m(standard:multiline-expression-wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m16[90m:24:[0m Missing trailing comma before ")" [90m(standard:trailing-comma-on-call-site)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m18[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\[0mMain.kt[90m:[0m28[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m9[90m:3:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m12[90m:3:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m18[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m19[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m22[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m23[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m32[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m33[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m37[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m38[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m43[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m44[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m47[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m48[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m48[90m:29:[0m Newline expected after opening parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m48[90m:42:[0m Parameter should start on a newline [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m48[90m:55:[0m Newline expected before closing parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m52[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m53[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m57[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m58[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m58[90m:30:[0m Newline expected after opening parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m58[90m:43:[0m Parameter should start on a newline [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m58[90m:57:[0m Newline expected before closing parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m62[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m63[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m67[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m68[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m68[90m:26:[0m Newline expected after opening parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m68[90m:39:[0m Parameter should start on a newline [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m68[90m:49:[0m Newline expected before closing parenthesis [90m(standard:function-signature)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmConfigurationStorage.kt[90m:[0m72[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m8[90m:3:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m11[90m:3:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m18[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m19[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m22[90m:1:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m23[90m:5:[0m Expected a blank line for this declaration [90m(standard:blank-line-before-declaration)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\platform\[0mJvmPlatformService.kt[90m:[0m26[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\util\[0mFormatUtils.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\util\[0mFormatUtils.kt[90m:[0m5[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\util\[0mPlatformUtils.kt[90m:[0m1[90m:1:[0m File must end with a newline (\n) [90m(standard:final-newline)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\src\jvmMain\kotlin\org\keyla\util\[0mPlatformUtils.kt[90m:[0m11[90m:2:[0m Trailing space(s) [90m(standard:no-trailing-spaces)[0m
+
+Summary error count (descending) by rule:
+  standard:no-trailing-spaces: 29
+  standard:blank-line-before-declaration: 15
+  standard:function-signature: 9
+  standard:final-newline: 7
+  standard:no-wildcard-imports: 4
+  standard:multiline-expression-wrapping: 3
+  standard:trailing-comma-on-call-site: 2
+  standard:wrapping: 2
+  standard:no-blank-line-before-rbrace: 1
+  standard:trailing-comma-on-declaration-site: 1

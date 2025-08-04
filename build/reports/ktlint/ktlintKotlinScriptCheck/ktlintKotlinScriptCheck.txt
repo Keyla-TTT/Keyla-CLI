@@ -1,0 +1,22 @@
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m8[90m:1:[0m Unexpected blank line(s) before "}" [90m(standard:no-blank-line-before-rbrace)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m29[90m:33:[0m A multiline expression should start on a new line [90m(standard:multiline-expression-wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m29[90m:33:[0m Missing newline after "(" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m54[90m:9:[0m Unexpected indent of raw string literal [90m(standard:string-template-indent)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m54[90m:24:[0m Missing newline before ")" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m59[90m:33:[0m A multiline expression should start on a new line [90m(standard:multiline-expression-wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m59[90m:33:[0m Missing newline after "(" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m74[90m:9:[0m Unexpected indent of raw string literal [90m(standard:string-template-indent)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m74[90m:24:[0m Missing newline before ")" [90m(standard:wrapping)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m121[90m:1:[0m Needless blank line(s) [90m(standard:no-consecutive-blank-lines)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m126[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m127[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m128[90m:23:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
+[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m129[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
+
+Summary error count (descending) by rule:
+  standard:discouraged-comment-location: 4
+  standard:wrapping: 4
+  standard:multiline-expression-wrapping: 2
+  standard:string-template-indent: 2
+  standard:no-blank-line-before-rbrace: 1
+  standard:no-consecutive-blank-lines: 1
