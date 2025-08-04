@@ -7,18 +7,22 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning") version "2.0.5" // Per versioning basato su git
 }
 
-// Configurazione ktlint per escludere directory build
-ktlint {
-    filter {
-        exclude("**/build/**")
-        exclude("**/generated/**")
-    }
-}
-
-// Configurazione detekt per escludere directory build
 detekt {
-    buildUponDefaultConfig = true
-    source = files("src/")
+    source.setFrom(
+        files(
+            "src/main/kotlin",
+            "src/main/java",
+            "src/test/kotlin",
+            "src/test/java",
+            "src/jvmMain/kotlin",
+            "src/jvmTest/kotlin",
+        ),
+    )
+
+
+    config.setFrom(files("$projectDir/detekt.yml"))
+    baseline = file("$projectDir/config/baseline.xml")
+    debug = true
 }
 
 group = "org.keyla"
@@ -138,10 +142,14 @@ java {
 kotlin {
     jvm()
     listOf(
-        linuxX64(), // Linux
-        mingwX64(), // Windows
-        macosArm64(), // Mac M1
-        macosX64(), // Mac Legacy
+        // Linux
+        linuxX64(),
+        // Windows
+        mingwX64(),
+        // Mac M1
+        macosArm64(),
+        // Mac Legacy
+        macosX64(),
     ).forEach { nativeTarget ->
         nativeTarget.apply {
             binaries {
