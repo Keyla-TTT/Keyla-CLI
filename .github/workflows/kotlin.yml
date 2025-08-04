@@ -50,8 +50,8 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
-      -   name: Check code format & lint
-          run: ./gradlew checkCode
+      - name: Check code format & lint
+        run: ./gradlew checkCode -PktlintExclude="**/build/**,**/.gradle/**,**/generated/**" -PdetektExclude="**/build/**,**/.gradle/**,**/generated/**"
 
   test:
     runs-on: ubuntu-latest
