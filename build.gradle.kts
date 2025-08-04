@@ -7,6 +7,20 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning") version "2.0.5" // Per versioning basato su git
 }
 
+// Configurazione ktlint per escludere directory build
+ktlint {
+    filter {
+        exclude("**/build/**")
+        exclude("**/generated/**")
+    }
+}
+
+// Configurazione detekt per escludere directory build
+detekt {
+    buildUponDefaultConfig = true
+    source = files("src/")
+}
+
 group = "org.keyla"
 version = "1.0-SNAPSHOT"
 
@@ -19,7 +33,7 @@ dependencies {
 }
 
 tasks.register("installGitHooks") {
-    description = "Installa i git hooks (pre-commit e commit-msg) compatibili con Windows"
+    description = "Install git hooks (pre-commit and commit-msg) compatible with Windows"
     group = "git hooks"
     doLast {
         // Pre-commit hook
@@ -30,7 +44,7 @@ tasks.register("installGitHooks") {
             #!/usr/bin/env sh
             echo "Running ktlint and detekt checks..."
 
-            # Rileva Windows e usa il comando appropriato
+            # Detect Windows and use appropriate command
             if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
                 cmd.exe /c gradlew.bat ktlintCheck detekt
                 EXIT_CODE=${'$'}?
@@ -55,7 +69,7 @@ tasks.register("installGitHooks") {
         )
         preCommitFile.setExecutable(true)
 
-        // Commit-msg hook (come prima)
+        // Commit-msg hook
         val commitMsgFile = file("${project.rootDir}/.git/hooks/commit-msg")
         commitMsgFile.writeText(
             """
@@ -67,9 +81,9 @@ tasks.register("installGitHooks") {
             pattern="^(feat|fix|docs|style|refactor|test|chore)(\([a-z0-9-]+\))?: .+"
 
             if ! echo "${'$'}commit_msg" | grep -E "${'$'}pattern" > /dev/null; then
-                echo "Errore: Il messaggio di commit non segue il formato convenzionale."
-                echo "Dovrebbe iniziare con feat:, fix:, docs:, style:, refactor:, test: o chore:"
-                echo "Esempio: feat: aggiungi nuova funzionalità"
+                echo "Error: Commit message does not follow conventional format."
+                echo "Should start with feat:, fix:, docs:, style:, refactor:, test: or chore:"
+                echo "Example: feat: add new functionality"
                 exit 1
             fi
             exit 0
@@ -77,41 +91,41 @@ tasks.register("installGitHooks") {
         )
         commitMsgFile.setExecutable(true)
 
-        println("Git hooks installati con successo.")
+        println("Git hooks installed successfully.")
     }
 }
 
-// Task per formattare tutto il codice
+// Task to format all code
 tasks.register("formatCode") {
     group = "code quality"
-    description = "Formatta tutti i file Kotlin del progetto"
+    description = "Format all Kotlin files in the project"
     dependsOn("ktlintFormat")
 
     doLast {
-        println("✅ Tutti i file Kotlin sono stati formattati!")
+        println("All Kotlin files have been formatted!")
     }
 }
 
-// Task per controllare tutto il codice
+// Task to check all code
 tasks.register("checkCode") {
     group = "code quality"
-    description = "Esegue tutti i controlli di qualità del codice"
+    description = "Run all code quality checks"
     dependsOn("ktlintCheck", "detekt")
 
     doLast {
-        println("✅ Tutti i controlli di qualità sono stati completati!")
+        println("All code quality checks completed!")
     }
 }
 
-// Task per fix automatico completo
+// Task for complete automatic fix
 tasks.register("fixCode") {
     group = "code quality"
-    description = "Corregge automaticamente tutti i problemi di stile risolvibili"
+    description = "Automatically fix all resolvable style issues"
     dependsOn("ktlintFormat")
 
     doLast {
-        println("✅ Codice formattato e problemi di stile risolti automaticamente!")
-        println("💡 Esegui 'gradlew checkCode' per verificare eventuali problemi rimanenti")
+        println("Code formatted and style issues automatically resolved!")
+        println("Run 'gradlew checkCode' to verify any remaining issues")
     }
 }
 
