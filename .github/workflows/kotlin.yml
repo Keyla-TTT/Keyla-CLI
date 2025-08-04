@@ -51,7 +51,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
       - name: Check formatting
-        run: ./gradlew ktlintCheck
+        run: ./gradlew codeCheck
 
   lint:
     runs-on: ubuntu-latest
