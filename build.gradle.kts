@@ -19,64 +19,98 @@ dependencies {
     "dokkaPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
 }
 
-//tasks.register("installGitHooks") {
-//    description = "Installa i git hooks (pre-commit e commit-msg) compatibili con Windows"
-//    group = "git hooks"
-//    doLast {
-//        // Pre-commit hook
-//        val preCommitFile = file("${project.rootDir}/.git/hooks/pre-commit")
-//        preCommitFile.parentFile.mkdirs()
-//        preCommitFile.writeText("""
-//            #!/usr/bin/env sh
-//            echo "Running ktlint and detekt checks..."
-//
-//            # Rileva Windows e usa il comando appropriato
-//            if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
-//                cmd.exe /c gradlew.bat ktlintCheck detekt
-//                EXIT_CODE=${'$'}?
-//            else
-//                ./gradlew ktlintCheck detekt
-//                EXIT_CODE=${'$'}?
-//            fi
-//
-//            if [ ${'$'}EXIT_CODE -ne 0 ]; then
-//                echo "Pre-commit checks failed. Attempting to auto-format..."
-//                if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
-//                    cmd.exe /c gradlew.bat ktlintFormat
-//                else
-//                    ./gradlew ktlintFormat
-//                fi
-//                echo "Code has been auto-formatted. Please review and commit again."
-//                exit 1
-//            else
-//                echo "Pre-commit checks passed."
-//            fi
-//        """.trimIndent())
-//        preCommitFile.setExecutable(true)
-//
-//        // Commit-msg hook (come prima)
-//        val commitMsgFile = file("${project.rootDir}/.git/hooks/commit-msg")
-//        commitMsgFile.writeText("""
-//            #!/usr/bin/env sh
-//
-//            commit_file=${'$'}1
-//            commit_msg=$(cat "${'$'}commit_file")
-//
-//            pattern="^(feat|fix|docs|style|refactor|test|chore)(\([a-z0-9-]+\))?: .+"
-//
-//            if ! echo "${'$'}commit_msg" | grep -E "${'$'}pattern" > /dev/null; then
-//                echo "Errore: Il messaggio di commit non segue il formato convenzionale."
-//                echo "Dovrebbe iniziare con feat:, fix:, docs:, style:, refactor:, test: o chore:"
-//                echo "Esempio: feat: aggiungi nuova funzionalità"
-//                exit 1
-//            fi
-//            exit 0
-//        """.trimIndent())
-//        commitMsgFile.setExecutable(true)
-//
-//        println("Git hooks installati con successo.")
-//    }
-//}
+tasks.register("installGitHooks") {
+    description = "Installa i git hooks (pre-commit e commit-msg) compatibili con Windows"
+    group = "git hooks"
+    doLast {
+        // Pre-commit hook
+        val preCommitFile = file("${project.rootDir}/.git/hooks/pre-commit")
+        preCommitFile.parentFile.mkdirs()
+        preCommitFile.writeText("""
+            #!/usr/bin/env sh
+            echo "Running ktlint and detekt checks..."
+
+            # Rileva Windows e usa il comando appropriato
+            if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
+                cmd.exe /c gradlew.bat ktlintCheck detekt
+                EXIT_CODE=${'$'}?
+            else
+                ./gradlew ktlintCheck detekt
+                EXIT_CODE=${'$'}?
+            fi
+
+            if [ ${'$'}EXIT_CODE -ne 0 ]; then
+                echo "Pre-commit checks failed. Attempting to auto-format..."
+                if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
+                    cmd.exe /c gradlew.bat ktlintFormat
+                else
+                    ./gradlew ktlintFormat
+                fi
+                echo "Code has been auto-formatted. Please review and commit again."
+                exit 1
+            else
+                echo "Pre-commit checks passed."
+            fi
+        """.trimIndent())
+        preCommitFile.setExecutable(true)
+
+        // Commit-msg hook (come prima)
+        val commitMsgFile = file("${project.rootDir}/.git/hooks/commit-msg")
+        commitMsgFile.writeText("""
+            #!/usr/bin/env sh
+
+            commit_file=${'$'}1
+            commit_msg=$(cat "${'$'}commit_file")
+
+            pattern="^(feat|fix|docs|style|refactor|test|chore)(\([a-z0-9-]+\))?: .+"
+
+            if ! echo "${'$'}commit_msg" | grep -E "${'$'}pattern" > /dev/null; then
+                echo "Errore: Il messaggio di commit non segue il formato convenzionale."
+                echo "Dovrebbe iniziare con feat:, fix:, docs:, style:, refactor:, test: o chore:"
+                echo "Esempio: feat: aggiungi nuova funzionalità"
+                exit 1
+            fi
+            exit 0
+        """.trimIndent())
+        commitMsgFile.setExecutable(true)
+
+        println("Git hooks installati con successo.")
+    }
+}
+
+// Task per formattare tutto il codice
+tasks.register("formatCode") {
+    group = "code quality"
+    description = "Formatta tutti i file Kotlin del progetto"
+    dependsOn("ktlintFormat")
+
+    doLast {
+        println("✅ Tutti i file Kotlin sono stati formattati!")
+    }
+}
+
+// Task per controllare tutto il codice
+tasks.register("checkCode") {
+    group = "code quality"
+    description = "Esegue tutti i controlli di qualità del codice"
+    dependsOn("ktlintCheck", "detekt")
+
+    doLast {
+        println("✅ Tutti i controlli di qualità sono stati completati!")
+    }
+}
+
+// Task per fix automatico completo
+tasks.register("fixCode") {
+    group = "code quality"
+    description = "Corregge automaticamente tutti i problemi di stile risolvibili"
+    dependsOn("ktlintFormat")
+
+    doLast {
+        println("✅ Codice formattato e problemi di stile risolti automaticamente!")
+        println("💡 Esegui 'gradlew checkCode' per verificare eventuali problemi rimanenti")
+    }
+}
 
 java {
     toolchain {
