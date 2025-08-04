@@ -31,7 +31,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
 
-  format:
+  check:
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -50,46 +50,12 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
-      - name: Setup ktlint configuration
-        run: |
-          echo '[{**/build/**,**/.gradle/**,**/generated/**}]' >> .editorconfig
-          echo 'disabled_rules = *' >> .editorconfig
-      - name: Check formatting
-        run: ./gradlew ktlintCheck
-  lint:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: Restore Gradle cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle-
-      - name: Setup detekt configuration
-        run: |
-            mkdir -p .github/config
-            echo 'processors:' > .github/config/detekt-ci.yml
-            echo '  active: true' >> .github/config/detekt-ci.yml
-            echo '  exclude:' >> .github/config/detekt-ci.yml
-            echo '    - "**/build/**"' >> .github/config/detekt-ci.yml
-            echo '    - "**/.gradle/**"' >> .github/config/detekt-ci.yml
-            echo '    - "**/generated/**"' >> .github/config/detekt-ci.yml
-      - name: Run detekt
-        run: ./gradlew detekt --config .github/config/detekt-ci.yml
+      -   name: Check code format & lint
+          run: ./gradlew checkCode
 
   test:
     runs-on: ubuntu-latest
-    needs: [ format, lint ]
+    needs: [ check ]
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
