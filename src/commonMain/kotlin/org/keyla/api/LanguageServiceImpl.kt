@@ -7,9 +7,8 @@ import org.keyla.models.*
 
 class LanguageServiceImpl(
     private val baseUrl: String,
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : LanguageService {
-
     override suspend fun getDictionaries(): DictionariesResponse {
         return try {
             httpClient.get("$baseUrl/dictionaries").body()
@@ -37,4 +36,4 @@ class LanguageServiceImpl(
     fun close() {
         httpClient.close()
     }
-} 
+}

@@ -7,13 +7,14 @@ import org.keyla.ui.AppMode
 
 class ApplicationLauncher(
     configurationStorage: ConfigurationStorage,
-    platformService: PlatformService
+    platformService: PlatformService,
 ) {
-    private val container = ApplicationContainer(
-        configurationStorage,
-        platformService
-    )
-    
+    private val container =
+        ApplicationContainer(
+            configurationStorage,
+            platformService,
+        )
+
     fun launch(args: Array<String>) {
         when {
             args.isEmpty() || args[0] == "start" || args[0] == "test" -> {
@@ -39,7 +40,7 @@ class ApplicationLauncher(
             }
         }
     }
-    
+
     private fun launchMainApplication(mode: AppMode) {
         try {
             val application = container.getApplication()
@@ -48,7 +49,7 @@ class ApplicationLauncher(
             println("Error: ${e.message}")
         }
     }
-    
+
     private fun showUsage() {
         println("Keyla CLI - Typing Test Application")
         println()
@@ -61,4 +62,4 @@ class ApplicationLauncher(
         println("  keyla history           View test history")
         println("  keyla profile           Manage profiles")
     }
-} 
+}

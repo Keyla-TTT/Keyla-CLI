@@ -4,24 +4,24 @@ import org.keyla.models.*
 import kotlin.test.*
 
 class AnalyticsServiceTest {
-    
     @Test
     fun `AnalyticsResponse should have correct structure`() {
-        val analytics = AnalyticsResponse(
-            userId = "user123",
-            totalTests = 25,
-            averageWpm = 65.5,
-            averageAccuracy = 92.3,
-            bestWpm = 85.0,
-            worstWpm = 45.2,
-            bestAccuracy = 98.5,
-            worstAccuracy = 78.9,
-            wpmImprovement = 12.5,
-            accuracyImprovement = 5.2,
-            totalErrors = 150,
-            averageErrorsPerTest = 6.0
-        )
-        
+        val analytics =
+            AnalyticsResponse(
+                userId = "user123",
+                totalTests = 25,
+                averageWpm = 65.5,
+                averageAccuracy = 92.3,
+                bestWpm = 85.0,
+                worstWpm = 45.2,
+                bestAccuracy = 98.5,
+                worstAccuracy = 78.9,
+                wpmImprovement = 12.5,
+                accuracyImprovement = 5.2,
+                totalErrors = 150,
+                averageErrorsPerTest = 6.0,
+            )
+
         assertEquals("user123", analytics.userId)
         assertEquals(25, analytics.totalTests)
         assertEquals(65.5, analytics.averageWpm, 0.01)
@@ -35,24 +35,25 @@ class AnalyticsServiceTest {
         assertEquals(150, analytics.totalErrors)
         assertEquals(6.0, analytics.averageErrorsPerTest, 0.01)
     }
-    
+
     @Test
     fun `AnalyticsResponse with zero tests should work`() {
-        val analytics = AnalyticsResponse(
-            userId = "newuser",
-            totalTests = 0,
-            averageWpm = 0.0,
-            averageAccuracy = 0.0,
-            bestWpm = 0.0,
-            worstWpm = 0.0,
-            bestAccuracy = 0.0,
-            worstAccuracy = 0.0,
-            wpmImprovement = 0.0,
-            accuracyImprovement = 0.0,
-            totalErrors = 0,
-            averageErrorsPerTest = 0.0
-        )
-        
+        val analytics =
+            AnalyticsResponse(
+                userId = "newuser",
+                totalTests = 0,
+                averageWpm = 0.0,
+                averageAccuracy = 0.0,
+                bestWpm = 0.0,
+                worstWpm = 0.0,
+                bestAccuracy = 0.0,
+                worstAccuracy = 0.0,
+                wpmImprovement = 0.0,
+                accuracyImprovement = 0.0,
+                totalErrors = 0,
+                averageErrorsPerTest = 0.0,
+            )
+
         assertEquals("newuser", analytics.userId)
         assertEquals(0, analytics.totalTests)
         assertEquals(0.0, analytics.averageWpm, 0.01)
@@ -60,24 +61,25 @@ class AnalyticsServiceTest {
         assertEquals(0, analytics.totalErrors)
         assertEquals(0.0, analytics.averageErrorsPerTest, 0.01)
     }
-    
+
     @Test
     fun `AnalyticsResponse with single test should work`() {
-        val analytics = AnalyticsResponse(
-            userId = "singleuser",
-            totalTests = 1,
-            averageWpm = 50.0,
-            averageAccuracy = 100.0,
-            bestWpm = 50.0,
-            worstWpm = 50.0,
-            bestAccuracy = 100.0,
-            worstAccuracy = 100.0,
-            wpmImprovement = 0.0,
-            accuracyImprovement = 0.0,
-            totalErrors = 0,
-            averageErrorsPerTest = 0.0
-        )
-        
+        val analytics =
+            AnalyticsResponse(
+                userId = "singleuser",
+                totalTests = 1,
+                averageWpm = 50.0,
+                averageAccuracy = 100.0,
+                bestWpm = 50.0,
+                worstWpm = 50.0,
+                bestAccuracy = 100.0,
+                worstAccuracy = 100.0,
+                wpmImprovement = 0.0,
+                accuracyImprovement = 0.0,
+                totalErrors = 0,
+                averageErrorsPerTest = 0.0,
+            )
+
         assertEquals("singleuser", analytics.userId)
         assertEquals(1, analytics.totalTests)
         assertEquals(50.0, analytics.averageWpm, 0.01)
@@ -88,4 +90,4 @@ class AnalyticsServiceTest {
         assertEquals(100.0, analytics.worstAccuracy, 0.01)
         assertEquals(0, analytics.totalErrors)
     }
-} 
+}

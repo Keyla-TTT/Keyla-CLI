@@ -8,7 +8,7 @@ import org.keyla.models.*
 
 class TestServiceImpl(
     private val baseUrl: String,
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : TestService {
     override suspend fun createTest(request: TestRequest): TestResponse {
         return httpClient.post("$baseUrl/tests") {
@@ -29,7 +29,10 @@ class TestServiceImpl(
         return httpClient.get("$baseUrl/tests/language/$language").body()
     }
 
-    override suspend fun submitTestResults(testId: String, results: TestResultsRequest): TestResponse {
+    override suspend fun submitTestResults(
+        testId: String,
+        results: TestResultsRequest,
+    ): TestResponse {
         return httpClient.put("$baseUrl/tests/$testId/results") {
             contentType(ContentType.Application.Json)
             setBody(results)
@@ -43,4 +46,4 @@ class TestServiceImpl(
     fun close() {
         httpClient.close()
     }
-} 
+}

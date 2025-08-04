@@ -7,9 +7,8 @@ import org.keyla.models.ProfileStatisticsListResponse
 
 class StatisticsServiceImpl(
     private val baseUrl: String,
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : StatisticsService {
-    
     override suspend fun getProfileStatistics(profileId: String): ProfileStatisticsListResponse {
         return httpClient.get("$baseUrl/stats/$profileId").body()
     }
@@ -17,4 +16,4 @@ class StatisticsServiceImpl(
     fun close() {
         httpClient.close()
     }
-} 
+}

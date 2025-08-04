@@ -9,14 +9,16 @@ suspend fun handleUpdateBackendUrl(
     state: SettingsState,
     updateState: (SettingsState) -> Unit,
     setScreen: (SettingsScreen) -> Unit,
-    configurationManager: ConfigurationManager
+    configurationManager: ConfigurationManager,
 ) {
     try {
         configurationManager.setApiBaseUrl(newUrl)
-        updateState(state.copy(
-            currentBackendUrl = newUrl,
-            successMessage = "Backend URL updated successfully!"
-        ))
+        updateState(
+            state.copy(
+                currentBackendUrl = newUrl,
+                successMessage = "Backend URL updated successfully!",
+            ),
+        )
         setScreen(SettingsScreen.Success)
     } catch (e: Exception) {
         updateState(state.copy(errorMessage = getErrorMessage(e, "updateBackendUrl")))
@@ -28,7 +30,7 @@ suspend fun handleTestConnection(
     configService: ConfigService,
     state: SettingsState,
     updateState: (SettingsState) -> Unit,
-    setScreen: (SettingsScreen) -> Unit
+    setScreen: (SettingsScreen) -> Unit,
 ) {
     try {
         val isConnected = configService.testConnection()
@@ -49,7 +51,7 @@ suspend fun handleLoadProfiles(
     profileService: ProfileService,
     state: SettingsState,
     updateState: (SettingsState) -> Unit,
-    setScreen: (SettingsScreen) -> Unit
+    setScreen: (SettingsScreen) -> Unit,
 ) {
     try {
         val profilesResponse = profileService.getAllProfiles()
@@ -67,18 +69,20 @@ suspend fun handleSelectProfile(
     profileIndex: Int,
     updateState: (SettingsState) -> Unit,
     setScreen: (SettingsScreen) -> Unit,
-    configurationManager: ConfigurationManager
+    configurationManager: ConfigurationManager,
 ) {
     try {
         val selectedProfile = state.availableProfiles[profileIndex]
         configurationManager.setActiveProfileId(selectedProfile.id)
-        updateState(state.copy(
-            currentProfile = selectedProfile,
-            successMessage = "Active profile changed to ${selectedProfile.name}!"
-        ))
+        updateState(
+            state.copy(
+                currentProfile = selectedProfile,
+                successMessage = "Active profile changed to ${selectedProfile.name}!",
+            ),
+        )
         setScreen(SettingsScreen.Success)
     } catch (e: Exception) {
         updateState(state.copy(errorMessage = getErrorMessage(e, "selectProfile")))
         setScreen(SettingsScreen.Error)
     }
-} 
+}

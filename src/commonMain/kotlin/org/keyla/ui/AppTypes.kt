@@ -6,5 +6,5 @@ enum class AppMode {
     Settings,
     Stats,
     History,
-    Profile
-} 
+    Profile,
+}

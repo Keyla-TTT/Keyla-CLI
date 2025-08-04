@@ -7,15 +7,16 @@ import org.keyla.platform.JvmPlatformService
 
 fun main(args: Array<String>) {
     System.setProperty("kotter.terminal.prefer.real", "true")
-    
+
     val configurationStorage: ConfigurationStorage = getPlatformConfigurationStorage()
     val platformService: PlatformService = getPlatformService()
-    
-    val launcher = ApplicationLauncher(
-        configurationStorage,
-        platformService
-    )
-    
+
+    val launcher =
+        ApplicationLauncher(
+            configurationStorage,
+            platformService,
+        )
+
     launcher.launch(args)
 }
 
@@ -25,4 +26,4 @@ actual fun getPlatformConfigurationStorage(): ConfigurationStorage {
 
 actual fun getPlatformService(): PlatformService {
     return JvmPlatformService()
-} 
+}

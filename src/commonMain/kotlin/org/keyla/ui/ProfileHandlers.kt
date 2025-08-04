@@ -7,7 +7,7 @@ suspend fun handleChangeProfile(
     profileService: ProfileService,
     state: ProfileState,
     updateState: (ProfileState) -> Unit,
-    setScreen: (ProfileScreen) -> Unit
+    setScreen: (ProfileScreen) -> Unit,
 ) {
     try {
         val profilesResponse = profileService.getAllProfiles()
@@ -31,19 +31,21 @@ suspend fun handleCreateProfile(
     state: ProfileState,
     updateState: (ProfileState) -> Unit,
     setScreen: (ProfileScreen) -> Unit,
-    configurationManager: org.keyla.core.interfaces.ConfigurationManager
+    configurationManager: org.keyla.core.interfaces.ConfigurationManager,
 ) {
     try {
         val createRequest = CreateProfileRequest(nameInput, emailInput)
         val profile = profileService.createProfile(createRequest)
         configurationManager.setActiveProfileId(profile.id)
-        updateState(state.copy(
-            currentProfile = profile,
-            successMessage = "Profile created successfully!"
-        ))
+        updateState(
+            state.copy(
+                currentProfile = profile,
+                successMessage = "Profile created successfully!",
+            ),
+        )
         setScreen(ProfileScreen.Success)
     } catch (e: Exception) {
         updateState(state.copy(errorMessage = getErrorMessage(e, "createProfile")))
         setScreen(ProfileScreen.Error)
     }
-} 
+}

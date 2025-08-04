@@ -1,22 +1,28 @@
 package org.keyla.ui
 
+import com.varabyte.kotter.foundation.input.name
 import com.varabyte.kotter.foundation.input.onKeyPressed
 import com.varabyte.kotter.foundation.liveVarOf
 import com.varabyte.kotter.foundation.runUntilSignal
 import com.varabyte.kotter.foundation.session
 import com.varabyte.kotter.foundation.text.*
-import com.varabyte.kotter.foundation.input.name
-import org.keyla.models.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.keyla.models.*
 
 sealed class SettingsScreen {
     object MainMenu : SettingsScreen()
+
     object UpdateBackendUrl : SettingsScreen()
+
     object TestConnection : SettingsScreen()
+
     object SelectProfile : SettingsScreen()
+
     object ProfileInfo : SettingsScreen()
+
     object Error : SettingsScreen()
+
     object Success : SettingsScreen()
 }
 
@@ -25,41 +31,49 @@ data class SettingsState(
     val currentProfile: ProfileResponse? = null,
     val availableProfiles: List<ProfileResponse> = emptyList(),
     val errorMessage: String? = null,
-    val successMessage: String? = null
+    val successMessage: String? = null,
 )
 
 suspend fun settingsMode(
     configService: org.keyla.api.ConfigService,
     profileService: org.keyla.api.ProfileService,
-    configurationManager: org.keyla.core.interfaces.ConfigurationManager
+    configurationManager: org.keyla.core.interfaces.ConfigurationManager,
 ) {
     coroutineScope {
         session {
             var screen by liveVarOf<SettingsScreen>(SettingsScreen.MainMenu)
             var state by liveVarOf(SettingsState(currentBackendUrl = configurationManager.getApiBaseUrl()))
-            
+
             var settingsMenuIndex by liveVarOf(0)
             var profileIndex by liveVarOf(0)
             var focusedField by liveVarOf(0)
-            
+
             var backendUrlInput by liveVarOf("")
 
-            fun updateState(newState: SettingsState) { state = newState }
-            fun setScreen(newScreen: SettingsScreen) { screen = newScreen }
+            fun updateState(newState: SettingsState) {
+                state = newState
+            }
+
+            fun setScreen(newScreen: SettingsScreen) {
+                screen = newScreen
+            }
 
             launch {
                 try {
                     val profilesResponse = profileService.getAllProfiles()
                     val activeProfileId = configurationManager.getActiveProfileId()
-                    val currentProfile = if (activeProfileId != null) {
-                        profilesResponse.profiles.find { it.id == activeProfileId }
-                    } else {
-                        profilesResponse.profiles.firstOrNull()
-                    }
-                    updateState(state.copy(
-                        availableProfiles = profilesResponse.profiles,
-                        currentProfile = currentProfile
-                    ))
+                    val currentProfile =
+                        if (activeProfileId != null) {
+                            profilesResponse.profiles.find { it.id == activeProfileId }
+                        } else {
+                            profilesResponse.profiles.firstOrNull()
+                        }
+                    updateState(
+                        state.copy(
+                            availableProfiles = profilesResponse.profiles,
+                            currentProfile = currentProfile,
+                        ),
+                    )
                 } catch (e: Exception) {
                     updateState(state.copy(errorMessage = "Failed to load profiles: ${e.message}"))
                 }
@@ -72,29 +86,33 @@ suspend fun settingsMode(
                     green { textLine("╚══════════════════════════════════════════════════════════════╝") }
                     textLine()
                 }
-                
+
                 fun renderGoBackOption() {
                     textLine()
                     cyan { textLine("> Go Back") }
                     textLine()
                     yellow { textLine("Press Enter to go back") }
                 }
-                
+
                 when (screen) {
                     is SettingsScreen.MainMenu -> {
                         renderHeader("CLI SETTINGS")
                         textLine("Current Backend URL: ${state.currentBackendUrl}")
                         textLine("Current Active Profile: ${state.currentProfile?.name ?: "None"}")
                         textLine()
-                        val options = listOf(
-                            "1. Update Backend URL",
-                            "2. Change Active Profile",
-                            "3. Test Connection",
-                            "4. Exit"
-                        )
+                        val options =
+                            listOf(
+                                "1. Update Backend URL",
+                                "2. Change Active Profile",
+                                "3. Test Connection",
+                                "4. Exit",
+                            )
                         options.forEachIndexed { i, opt ->
-                            if (i == settingsMenuIndex) cyan { textLine("> $opt") }
-                            else textLine("  $opt")
+                            if (i == settingsMenuIndex) {
+                                cyan { textLine("> $opt") }
+                            } else {
+                                textLine("  $opt")
+                            }
                         }
                         textLine()
                         yellow { textLine("Use arrow keys to navigate, Enter to select") }
@@ -117,13 +135,19 @@ suspend fun settingsMode(
                             textLine("Please create a profile first using 'keyla profile'")
                         } else {
                             state.availableProfiles.forEachIndexed { i, profile ->
-                                if (i == profileIndex) cyan { textLine("> ${profile.name} (${profile.email})") }
-                                else textLine("  ${profile.name} (${profile.email})")
+                                if (i == profileIndex) {
+                                    cyan { textLine("> ${profile.name} (${profile.email})") }
+                                } else {
+                                    textLine("  ${profile.name} (${profile.email})")
+                                }
                             }
                         }
                         textLine()
-                        if (profileIndex == state.availableProfiles.size) cyan { textLine("> Go Back") }
-                        else textLine("  Go Back")
+                        if (profileIndex == state.availableProfiles.size) {
+                            cyan { textLine("> Go Back") }
+                        } else {
+                            textLine("  Go Back")
+                        }
                         textLine()
                         yellow { textLine("Use arrow keys to navigate, Enter to select") }
                     }
@@ -163,23 +187,31 @@ suspend fun settingsMode(
                     when (screen) {
                         is SettingsScreen.MainMenu -> {
                             when (key.name) {
-                                "UP" -> { settingsMenuIndex = (settingsMenuIndex - 1).coerceAtLeast(0) }
-                                "DOWN" -> { settingsMenuIndex = (settingsMenuIndex + 1).coerceAtMost(3) }
+                                "UP" -> {
+                                    settingsMenuIndex = (settingsMenuIndex - 1).coerceAtLeast(0)
+                                }
+                                "DOWN" -> {
+                                    settingsMenuIndex = (settingsMenuIndex + 1).coerceAtMost(3)
+                                }
                                 "ENTER" -> {
                                     when (settingsMenuIndex) {
                                         0 -> screen = SettingsScreen.UpdateBackendUrl
                                         1 -> {
                                             screen = SettingsScreen.SelectProfile
-                                            launch { 
+                                            launch {
                                                 handleLoadProfiles(profileService, state, ::updateState, ::setScreen)
                                             }
                                         }
                                         2 -> {
                                             screen = SettingsScreen.TestConnection
-                                            launch { 
+                                            launch {
                                                 val currentUrl = configurationManager.getApiBaseUrl()
-                                                val currentConfigService = org.keyla.api.ConfigServiceImpl(currentUrl, org.keyla.api.createHttpClient())
-                                                handleTestConnection(currentConfigService, state, ::updateState, ::setScreen) 
+                                                val currentConfigService =
+                                                    org.keyla.api.ConfigServiceImpl(
+                                                        currentUrl,
+                                                        org.keyla.api.createHttpClient(),
+                                                    )
+                                                handleTestConnection(currentConfigService, state, ::updateState, ::setScreen)
                                             }
                                         }
                                         3 -> signal()
@@ -200,9 +232,10 @@ suspend fun settingsMode(
                                     }
                                 }
                                 "BACKSPACE" -> if (backendUrlInput.isNotEmpty()) backendUrlInput = backendUrlInput.dropLast(1)
-                                else -> if (key.name.length == 1) {
-                                    backendUrlInput += key.name
-                                }
+                                else ->
+                                    if (key.name.length == 1) {
+                                        backendUrlInput += key.name
+                                    }
                             }
                         }
                         is SettingsScreen.SelectProfile -> {
@@ -214,7 +247,14 @@ suspend fun settingsMode(
                                         screen = SettingsScreen.MainMenu
                                     } else {
                                         launch {
-                                            handleSelectProfile(profileService, state, profileIndex, ::updateState, ::setScreen, configurationManager)
+                                            handleSelectProfile(
+                                                profileService,
+                                                state,
+                                                profileIndex,
+                                                ::updateState,
+                                                ::setScreen,
+                                                configurationManager,
+                                            )
                                         }
                                     }
                                 }
@@ -243,4 +283,4 @@ suspend fun settingsMode(
             }
         }
     }
-} 
+}

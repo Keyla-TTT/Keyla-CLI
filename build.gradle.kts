@@ -5,7 +5,6 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("org.jetbrains.dokka") version "1.9.20" // Per la documentazione
     id("org.danilopianini.git-sensitive-semantic-versioning") version "2.0.5" // Per versioning basato su git
-
 }
 
 group = "org.keyla"
@@ -26,7 +25,8 @@ tasks.register("installGitHooks") {
         // Pre-commit hook
         val preCommitFile = file("${project.rootDir}/.git/hooks/pre-commit")
         preCommitFile.parentFile.mkdirs()
-        preCommitFile.writeText("""
+        preCommitFile.writeText(
+            """
             #!/usr/bin/env sh
             echo "Running ktlint and detekt checks..."
 
@@ -51,12 +51,14 @@ tasks.register("installGitHooks") {
             else
                 echo "Pre-commit checks passed."
             fi
-        """.trimIndent())
+            """.trimIndent(),
+        )
         preCommitFile.setExecutable(true)
 
         // Commit-msg hook (come prima)
         val commitMsgFile = file("${project.rootDir}/.git/hooks/commit-msg")
-        commitMsgFile.writeText("""
+        commitMsgFile.writeText(
+            """
             #!/usr/bin/env sh
 
             commit_file=${'$'}1
@@ -71,7 +73,8 @@ tasks.register("installGitHooks") {
                 exit 1
             fi
             exit 0
-        """.trimIndent())
+            """.trimIndent(),
+        )
         commitMsgFile.setExecutable(true)
 
         println("Git hooks installati con successo.")
@@ -117,8 +120,6 @@ java {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
-
-
 
 kotlin {
     jvm()
