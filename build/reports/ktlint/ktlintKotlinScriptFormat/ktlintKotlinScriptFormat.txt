@@ -1,7 +1,0 @@
-[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m127[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
-[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m128[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
-[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m129[90m:23:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
-[90mC:\Users\giann\Keyla-TTT\Keyla-CLI\[0mbuild.gradle.kts[90m:[0m130[90m:21:[0m A comment in a 'value_argument_list' is only allowed when placed on a separate line [90m(standard:discouraged-comment-location)[0m
-
-Summary error count (descending) by rule:
-  standard:discouraged-comment-location: 4
