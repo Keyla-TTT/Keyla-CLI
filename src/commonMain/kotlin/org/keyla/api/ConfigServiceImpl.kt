@@ -8,7 +8,7 @@ import org.keyla.models.*
 
 class ConfigServiceImpl(
     private val baseUrl: String,
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : ConfigService {
     override suspend fun getAllConfig(): ConfigListResponse {
         return httpClient.get("$baseUrl/config").body()
@@ -18,7 +18,10 @@ class ConfigServiceImpl(
         return httpClient.get("$baseUrl/current-config").body()
     }
 
-    override suspend fun getConfigEntry(section: String, key: String): ConfigEntry {
+    override suspend fun getConfigEntry(
+        section: String,
+        key: String,
+    ): ConfigEntry {
         return httpClient.get("$baseUrl/config/$section/$key").body()
     }
 
@@ -50,4 +53,4 @@ class ConfigServiceImpl(
     fun close() {
         httpClient.close()
     }
-} 
+}

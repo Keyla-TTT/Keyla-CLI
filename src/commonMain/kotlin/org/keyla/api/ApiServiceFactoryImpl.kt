@@ -1,7 +1,7 @@
 package org.keyla.api
 
 class ApiServiceFactoryImpl(
-    private val baseUrl: String
+    private val baseUrl: String,
 ) : ApiServiceFactory {
     private val httpClient = createHttpClient()
 
@@ -32,4 +32,4 @@ class ApiServiceFactoryImpl(
     override fun close() {
         httpClient.close()
     }
-} 
+}

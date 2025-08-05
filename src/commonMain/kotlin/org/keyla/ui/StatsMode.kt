@@ -1,14 +1,14 @@
 package org.keyla.ui
 
+import kotlinx.coroutines.coroutineScope
 import org.keyla.api.AnalyticsService
 import org.keyla.models.AnalyticsResponse
 import org.keyla.models.ProfileResponse
 import org.keyla.util.format1f
-import kotlinx.coroutines.coroutineScope
 
 suspend fun statsMode(
     analyticsService: AnalyticsService,
-    currentProfile: ProfileResponse?
+    currentProfile: ProfileResponse?,
 ) {
     coroutineScope {
         if (currentProfile == null) {
@@ -39,16 +39,16 @@ private fun displayNoDataMessage(profile: ProfileResponse) {
     println("║                    TYPING STATISTICS                        ║")
     println("╚══════════════════════════════════════════════════════════════╝")
     println()
-    
+
     println("👤 Profile: ${profile.name} (${profile.email})")
     println("📊 Total Tests Completed: 0")
     println()
-    
+
     println("╔══════════════════════════════════════════════════════════════╗")
     println("║                    NO DATA AVAILABLE                        ║")
     println("╚══════════════════════════════════════════════════════════════╝")
     println()
-    
+
     println("🎯 You haven't completed any typing tests yet!")
     println()
     println("To see your statistics, you need to:")
@@ -56,7 +56,7 @@ private fun displayNoDataMessage(profile: ProfileResponse) {
     println("   2. Complete the test")
     println("   3. Come back here to see your progress")
     println()
-    
+
     println("╔══════════════════════════════════════════════════════════════╗")
     println("║                    QUICK START                              ║")
     println("╚══════════════════════════════════════════════════════════════╝")
@@ -65,52 +65,55 @@ private fun displayNoDataMessage(profile: ProfileResponse) {
     println()
 }
 
-private fun displayAnalytics(analytics: AnalyticsResponse, profile: ProfileResponse) {
+private fun displayAnalytics(
+    analytics: AnalyticsResponse,
+    profile: ProfileResponse,
+) {
     println()
     println("╔══════════════════════════════════════════════════════════════╗")
     println("║                    TYPING STATISTICS                        ║")
     println("╚══════════════════════════════════════════════════════════════╝")
     println()
-    
+
     println("👤 Profile: ${profile.name} (${profile.email})")
     println("📊 Total Tests Completed: ${analytics.totalTests}")
     println()
-    
+
     println("╔══════════════════════════════════════════════════════════════╗")
     println("║                    PERFORMANCE METRICS                      ║")
     println("╚══════════════════════════════════════════════════════════════╝")
     println()
-    
+
     println("🏃 Speed (WPM):")
     println("   • Average: ${format1f(analytics.averageWpm)} WPM")
     println("   • Best: ${format1f(analytics.bestWpm)} WPM")
     println("   • Worst: ${format1f(analytics.worstWpm)} WPM")
     println("   • Improvement: ${format1f(analytics.wpmImprovement)} WPM")
     println()
-    
+
     println("🎯 Accuracy:")
     println("   • Average: ${format1f(analytics.averageAccuracy)}%")
     println("   • Best: ${format1f(analytics.bestAccuracy)}%")
     println("   • Worst: ${format1f(analytics.worstAccuracy)}%")
     println("   • Improvement: ${format1f(analytics.accuracyImprovement)}%")
     println()
-    
+
     println("❌ Errors:")
     println("   • Total Errors: ${analytics.totalErrors}")
     println("   • Average per Test: ${format1f(analytics.averageErrorsPerTest)}")
     println()
-    
+
     if (analytics.totalTests > 0) {
         val errorRate = (analytics.totalErrors.toDouble() / analytics.totalTests) * 100
         println("📈 Error Rate: ${format1f(errorRate)}%")
         println()
     }
-    
+
     println("╔══════════════════════════════════════════════════════════════╗")
     println("║                    SUMMARY                                  ║")
     println("╚══════════════════════════════════════════════════════════════╝")
     println()
-    
+
     when {
         analytics.totalTests == 0 -> {
             println("🎉 Welcome! Complete your first typing test to see your statistics.")
@@ -128,6 +131,6 @@ private fun displayAnalytics(analytics: AnalyticsResponse, profile: ProfileRespo
             println("💪 Keep practicing! Consistency is key to improvement.")
         }
     }
-    
+
     println()
-} 
+}
