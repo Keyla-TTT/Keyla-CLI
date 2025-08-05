@@ -19,7 +19,6 @@ detekt {
         ),
     )
 
-
     config.setFrom(files("$projectDir/detekt.yml"))
     baseline = file("$projectDir/config/baseline.xml")
     debug = true
@@ -135,7 +134,7 @@ tasks.register("ciCheckCode") {
                 "src/test/java",
                 "src/jvmMain/kotlin",
                 "src/jvmTest/kotlin",
-            )
+            ),
         )
     }
 
