@@ -7,6 +7,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
+import platform.posix.exit
 
 /**
  * Windows-specific implementation of PlatformService for native Windows applications.
@@ -19,7 +20,8 @@ import kotlinx.cinterop.ptr
 @OptIn(ExperimentalForeignApi::class)
 class MingwPlatformService : PlatformService {
     override fun exitProcess(code: Int): Nothing {
-        exitProcess(code)
+        exit(code)
+        throw IllegalStateException("Should never reach here")
     }
     
     override fun getCurrentTimeMillis(): Long {
