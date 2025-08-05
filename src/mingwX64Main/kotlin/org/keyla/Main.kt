@@ -9,12 +9,13 @@ fun main(args: Array<String>) {
     try {
         val configurationStorage: ConfigurationStorage = getPlatformConfigurationStorage()
         val platformService: PlatformService = getPlatformService()
-        
-        val launcher = ApplicationLauncher(
-            configurationStorage,
-            platformService
-        )
-        
+
+        val launcher =
+            ApplicationLauncher(
+                configurationStorage,
+                platformService,
+            )
+
         launcher.launch(args)
     } catch (e: Exception) {
         val errorMessage = e.message ?: "Unknown error occurred"

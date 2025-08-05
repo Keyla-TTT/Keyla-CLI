@@ -1,20 +1,20 @@
 package org.keyla.platform
 
-import org.keyla.core.interfaces.PlatformService
-import platform.windows.GetSystemTimeAsFileTime
-import platform.windows.FILETIME
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
+import org.keyla.core.interfaces.PlatformService
 import platform.posix.exit
+import platform.windows.FILETIME
+import platform.windows.GetSystemTimeAsFileTime
 
 /**
  * Windows-specific implementation of PlatformService for native Windows applications.
- * 
+ *
  * This implementation provides platform-specific operations for Windows applications,
  * including process management and time utilities.
- * 
+ *
  * @see org.keyla.core.interfaces.PlatformService
  */
 @OptIn(ExperimentalForeignApi::class)
@@ -23,7 +23,7 @@ class MingwPlatformService : PlatformService {
         exit(code)
         throw IllegalStateException("Should never reach here")
     }
-    
+
     override fun getCurrentTimeMillis(): Long {
         return memScoped {
             val fileTime = alloc<FILETIME>()
@@ -33,7 +33,7 @@ class MingwPlatformService : PlatformService {
             unixTime
         }
     }
-    
+
     override fun getUserInput(): String? {
         return readlnOrNull()
     }

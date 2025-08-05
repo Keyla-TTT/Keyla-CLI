@@ -1,7 +1,7 @@
 package org.keyla.platform
 
-import org.keyla.core.interfaces.ConfigurationStorage
 import kotlinx.cinterop.*
+import org.keyla.core.interfaces.ConfigurationStorage
 import platform.posix.*
 
 @OptIn(ExperimentalForeignApi::class)
@@ -20,7 +20,10 @@ class MingwConfigurationStorage : ConfigurationStorage {
         return readConfigValue(key)
     }
 
-    override fun saveString(key: String, value: String) {
+    override fun saveString(
+        key: String,
+        value: String,
+    ) {
         writeConfigValue(key, value)
     }
 
@@ -28,7 +31,10 @@ class MingwConfigurationStorage : ConfigurationStorage {
         return loadString(key)?.toBooleanStrictOrNull()
     }
 
-    override fun saveBoolean(key: String, value: Boolean) {
+    override fun saveBoolean(
+        key: String,
+        value: Boolean,
+    ) {
         saveString(key, value.toString())
     }
 
@@ -36,7 +42,10 @@ class MingwConfigurationStorage : ConfigurationStorage {
         return loadString(key)?.toIntOrNull()
     }
 
-    override fun saveInt(key: String, value: Int) {
+    override fun saveInt(
+        key: String,
+        value: Int,
+    ) {
         saveString(key, value.toString())
     }
 
@@ -72,7 +81,10 @@ class MingwConfigurationStorage : ConfigurationStorage {
         return null
     }
 
-    private fun writeConfigValue(key: String, value: String) {
+    private fun writeConfigValue(
+        key: String,
+        value: String,
+    ) {
         val map = mutableMapOf<String, String>()
         val file = fopen(configFile, "r")
         if (file != null) {
