@@ -2,4 +2,4 @@ package org.keyla.api
 
 import io.ktor.client.*
 
-expect fun createHttpClient(): HttpClient 
+expect fun createHttpClient(): HttpClient

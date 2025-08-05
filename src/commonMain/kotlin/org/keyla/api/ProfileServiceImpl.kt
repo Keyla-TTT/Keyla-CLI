@@ -8,7 +8,7 @@ import org.keyla.models.*
 
 class ProfileServiceImpl(
     private val baseUrl: String,
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : ProfileService {
     override suspend fun getAllProfiles(): ProfileListResponse {
         return try {
@@ -28,4 +28,4 @@ class ProfileServiceImpl(
     fun close() {
         httpClient.close()
     }
-} 
+}

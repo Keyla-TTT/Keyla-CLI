@@ -7,7 +7,7 @@ suspend fun handleViewAllConfig(
     configService: ConfigService,
     state: ConfigState,
     updateState: (ConfigState) -> Unit,
-    setScreen: (ConfigScreen) -> Unit
+    setScreen: (ConfigScreen) -> Unit,
 ) {
     try {
         val configList = configService.getAllConfig()
@@ -25,7 +25,7 @@ suspend fun handleUpdateConfig(
     valueInput: String,
     state: ConfigState,
     updateState: (ConfigState) -> Unit,
-    setScreen: (ConfigScreen) -> Unit
+    setScreen: (ConfigScreen) -> Unit,
 ) {
     try {
         val updateRequest = SimpleConfigUpdateRequest(keyInput, valueInput)
@@ -36,4 +36,4 @@ suspend fun handleUpdateConfig(
         updateState(state.copy(errorMessage = "Update failed, check key or try again"))
         setScreen(ConfigScreen.Error)
     }
-} 
+}

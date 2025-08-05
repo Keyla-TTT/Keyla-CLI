@@ -1,9 +1,15 @@
-name: Release
+name: Semantic Release
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
 
 jobs:
   release:
@@ -39,13 +45,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          
+
       - name: Install Linux native dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev zlib1g-dev
-          
+
       - name: Install curl on macOS
         if: runner.os == 'macOS'
         run: |
@@ -123,4 +129,6 @@ jobs:
       - name: Run Semantic Release with assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         run: npx semantic-release --extends ./release.config.cjs
