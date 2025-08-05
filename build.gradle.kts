@@ -121,6 +121,27 @@ tasks.register("checkCode") {
     }
 }
 
+tasks.register("ciCheckCode") {
+    group = "verification"
+    description = "Runs all code quality checks with CI-specific configurations"
+
+    doFirst {
+        (ktlint.filter { exclude("**/build/**", "**/.gradle/**", "**/generated/**") })
+        detekt.source.setFrom(
+            files(
+                "src/main/kotlin",
+                "src/main/java",
+                "src/test/kotlin",
+                "src/test/java",
+                "src/jvmMain/kotlin",
+                "src/jvmTest/kotlin",
+            )
+        )
+    }
+
+    dependsOn("ktlintCheck", "detekt")
+}
+
 // Task for complete automatic fix
 tasks.register("fixCode") {
     group = "code quality"

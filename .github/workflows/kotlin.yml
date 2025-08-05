@@ -51,7 +51,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
       - name: Check code format & lint
-        run: ./gradlew checkCode -PktlintExclude="**/build/**,**/.gradle/**,**/generated/**" -PdetektExclude="**/build/**,**/.gradle/**,**/generated/**"
+        run: ./gradlew ciCheckCode
 
   test:
     runs-on: ubuntu-latest
