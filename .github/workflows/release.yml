@@ -115,7 +115,10 @@ jobs:
                   cache: 'gradle'
 
           -   name: Generate Dokka documentation
-              run: ./gradlew dokkaHtml
+              run: |
+                ./gradlew dokkaHtml
+                echo "Documentation generated at:"
+                ls -la build/dokka/html/
 
           -   name: Upload documentation
               uses: actions/upload-artifact@v4
@@ -149,14 +152,20 @@ jobs:
           npm install --save-dev semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
 
       - name: List downloaded files
-        run: ls -R dist
+        run: |
+          echo "=== Downloaded artifacts structure ==="
+          find dist -type f -exec ls -la {} \;
+          echo "=== Artifact directories ==="
+          ls -la dist/
+          echo "=== Native artifacts ==="
+          ls -la dist/native-* || echo "No native artifacts found"
 
       - name: Run Semantic Release with assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-        run: npx semantic-release --extends ./release.config.cjs
+        run: npx semantic-release --extends ./release.config.js
 
   deploy-docs:
       name: Deploy Documentation
