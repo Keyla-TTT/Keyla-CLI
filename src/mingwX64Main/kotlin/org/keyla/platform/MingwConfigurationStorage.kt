@@ -113,4 +113,4 @@ class MingwConfigurationStorage : ConfigurationStorage {
             fclose(out)
         }
     }
-} 
+}

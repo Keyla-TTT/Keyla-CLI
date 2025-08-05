@@ -30,4 +30,4 @@ actual fun getPlatformConfigurationStorage(): ConfigurationStorage {
 
 actual fun getPlatformService(): PlatformService {
     return LinuxPlatformService()
-} 
+}

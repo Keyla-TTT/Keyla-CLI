@@ -73,4 +73,4 @@ class ApplicationLauncher(
         println("  keyla history           View test history")
         println("  keyla profile           Manage profiles")
     }
-} 
+}

@@ -28,4 +28,4 @@ class MacosPlatformService : PlatformService {
     override fun getUserInput(): String? {
         return readlnOrNull()
     }
-} 
+}

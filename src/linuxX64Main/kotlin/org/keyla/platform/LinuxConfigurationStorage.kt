@@ -134,4 +134,4 @@ class LinuxConfigurationStorage : ConfigurationStorage {
             rename(tempFile, configFile)
         }
     }
-} 
+}

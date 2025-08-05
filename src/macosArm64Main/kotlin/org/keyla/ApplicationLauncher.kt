@@ -74,4 +74,4 @@ class ApplicationLauncher(
         println("  history        View test history")
         println("  profile        Manage user profiles")
     }
-} 
+}

@@ -12,4 +12,4 @@ actual fun exitProcess(code: Int): Nothing {
 @OptIn(ExperimentalForeignApi::class)
 actual fun getCurrentTimeMillis(): Long {
     return platform.posix.time(null) * 1000
-} 
+}

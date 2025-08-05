@@ -37,4 +37,4 @@ class MingwPlatformService : PlatformService {
     override fun getUserInput(): String? {
         return readlnOrNull()
     }
-} 
+}

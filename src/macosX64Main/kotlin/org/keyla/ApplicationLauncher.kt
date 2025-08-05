@@ -79,4 +79,4 @@ class ApplicationLauncher(
         println("  keyla config   Open configuration")
         println("  keyla settings Open settings")
     }
-} 
+}

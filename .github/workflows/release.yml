@@ -98,9 +98,34 @@ jobs:
           name: native-${{ runner.os }}
           path: dist/*
 
+  documentation:
+      name: Generate Documentation
+      runs-on: ubuntu-latest
+      steps:
+          -   name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+          -   name: Set up JDK 21
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '21'
+                  distribution: 'temurin'
+                  cache: 'gradle'
+
+          -   name: Generate Dokka documentation
+              run: ./gradlew dokkaHtml
+
+          -   name: Upload documentation
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dokka-documentation
+                  path: build/dokka/html/
+
   publish:
     name: Run Semantic Release
-    needs: release
+    needs: [release, documentation]
     runs-on: ubuntu-latest
 
     steps:
@@ -132,3 +157,22 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         run: npx semantic-release --extends ./release.config.cjs
+
+  deploy-docs:
+      name: Deploy Documentation
+      needs: [ publish ]
+      runs-on: ubuntu-latest
+      permissions:
+          contents: write
+      steps:
+          -   name: Download documentation
+              uses: actions/download-artifact@v4
+              with:
+                  name: dokka-documentation
+                  path: docs
+
+          -   name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: docs
+                  branch: gh-pages

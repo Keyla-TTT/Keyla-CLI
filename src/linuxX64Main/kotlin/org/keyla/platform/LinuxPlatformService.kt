@@ -29,4 +29,4 @@ class LinuxPlatformService : PlatformService {
     override fun getUserInput(): String? {
         return readlnOrNull()
     }
-} 
+}

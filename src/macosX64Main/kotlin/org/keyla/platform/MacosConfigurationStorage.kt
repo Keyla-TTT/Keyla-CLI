@@ -134,4 +134,4 @@ class MacosConfigurationStorage : ConfigurationStorage {
             rename(tempFile, configFile)
         }
     }
-} 
+}

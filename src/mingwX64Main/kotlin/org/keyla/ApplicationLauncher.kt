@@ -75,4 +75,4 @@ class ApplicationLauncher(
         println("  keyla profile           Manage profiles")
         println()
     }
-} 
+}
