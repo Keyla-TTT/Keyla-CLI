@@ -50,8 +50,8 @@ class ApplicationLauncher(
             AppMode.Profile -> "Profile Management"
         }
         
-        println("Keyla CLI - $modeName")
-        println("Starting $modeName application...")
+        
+        
         
         try {
             val application = container.getApplication()
