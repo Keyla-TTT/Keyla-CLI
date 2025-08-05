@@ -10,12 +10,11 @@ plugins {
 detekt {
     source.setFrom(
         files(
-            "src/main/kotlin",
-            "src/main/java",
-            "src/test/kotlin",
-            "src/test/java",
-            "src/jvmMain/kotlin",
-            "src/jvmTest/kotlin",
+            "src/linuxX64Main",
+            "src/macosArm64Main",
+            "src/macosX64Main",
+            "src/mingwX64Main",
+            "src/commonMain",
         ),
     )
 
@@ -128,12 +127,11 @@ tasks.register("ciCheckCode") {
         (ktlint.filter { exclude("**/build/**", "**/.gradle/**", "**/generated/**") })
         detekt.source.setFrom(
             files(
-                "src/main/kotlin",
-                "src/main/java",
-                "src/test/kotlin",
-                "src/test/java",
-                "src/jvmMain/kotlin",
-                "src/jvmTest/kotlin",
+                "src/linuxX64Main",
+                "src/macosArm64Main",
+                "src/macosX64Main",
+                "src/mingwX64Main",
+                "src/commonMain",
             ),
         )
     }
