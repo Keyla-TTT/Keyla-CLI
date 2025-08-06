@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.0.0...v1.0.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* fix release.yml ([c220d6e](https://github.com/Keyla-TTT/Keyla-CLI/commit/c220d6e5b3c15807e471a382e9971eb915f3f624))
+* Update release.yml ([1e821b7](https://github.com/Keyla-TTT/Keyla-CLI/commit/1e821b705a304addc7e403d1608df46382a9dd52))
+
 # 1.0.0 (2025-08-06)
 
 
