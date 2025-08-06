@@ -8,9 +8,9 @@ module.exports = {
             '@semantic-release/github',
             {
                 assets: [
-                    { path: 'dist/native-ubuntu-latest/*', label: 'Linux Binary' },
-                    { path: 'dist/native-macos-latest/*', label: 'macOS ARM64 Binary' },
-                    { path: 'dist/native-windows-latest/*', label: 'Windows Binary' }
+                    { path: 'dist/native-Linux/*', label: 'Linux Binary' },
+                    { path: 'dist/native-macOS/*', label: 'macOS ARM64 Binary' },
+                    { path: 'dist/native-Windows/*', label: 'Windows Binary' }
                 ]
             }
         ],
