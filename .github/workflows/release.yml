@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - hotfix/*
 
 permissions:
   contents: write
@@ -159,6 +160,13 @@ jobs:
           ls -la dist/
           echo "=== Native artifacts ==="
           ls -la dist/native-* || echo "No native artifacts found"
+          echo "=== Contents of each native directory ==="
+          for dir in dist/native-*; do
+            if [ -d "$dir" ]; then
+              echo "--- $dir ---"
+              ls -la "$dir"
+            fi
+          done
 
       - name: Run Semantic Release with assets
         env:
@@ -174,6 +182,11 @@ jobs:
       permissions:
           contents: write
       steps:
+          -   name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
           -   name: Download documentation
               uses: actions/download-artifact@v4
               with:
