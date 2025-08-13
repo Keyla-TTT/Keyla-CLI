@@ -241,9 +241,6 @@ kotlin {
             }
         }
     }
-
-
 }
 
 val appName = "keyla"
-
