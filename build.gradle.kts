@@ -216,19 +216,20 @@ kotlin {
 
         val mingwX64Main by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-curl:$ktorVersion")
+                // Usa WinHttp invece di curl per Windows
+                implementation("io.ktor:ktor-client-winhttp:$ktorVersion")
             }
         }
 
         val macosArm64Main by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-curl:$ktorVersion")
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
             }
         }
 
         val macosX64Main by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-curl:$ktorVersion")
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
             }
         }
 
