@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.0.1...v1.1.0) (2025-08-13)
+
+
+### Bug Fixes
+
+* release with feature ([db61046](https://github.com/Keyla-TTT/Keyla-CLI/commit/db610469eb93565f8b753a115b6b650efcf324f1))
+* Windows and mac executing library ([81bf3a2](https://github.com/Keyla-TTT/Keyla-CLI/commit/81bf3a2035321bac84d293ca9471537fb60e847a))
+* Windows and mac executing library ([95d35bf](https://github.com/Keyla-TTT/Keyla-CLI/commit/95d35bf789d7d506de5f04fd18898e1f69ee407b))
+
+
+### Features
+
+* Merge pull request [#13](https://github.com/Keyla-TTT/Keyla-CLI/issues/13) from Keyla-TTT/feature/fixRelease ([864ddbb](https://github.com/Keyla-TTT/Keyla-CLI/commit/864ddbb110ca720386b34b7b1e3886878797bf9a))
+
 ## [1.0.1](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.0.0...v1.0.1) (2025-08-06)
 
 
