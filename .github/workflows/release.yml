@@ -14,32 +14,7 @@ permissions:
   packages: write
 
 jobs:
-  check-source:
-    runs-on: ubuntu-latest
-    outputs:
-        should-continue: ${{ steps.check.outputs.result }}
-    steps:
-        -   name: Checkout
-            uses: actions/checkout@v4
-            with:
-                fetch-depth: 0
-
-        -   name: Check if push comes from main
-            id: check
-            run: |
-                # Verifica se l'ultimo commit su release esiste anche su main
-                COMMIT_SHA="${{ github.sha }}"
-                if git branch --contains $COMMIT_SHA | grep -q "origin/main"; then
-                  echo "result=true" >> $GITHUB_OUTPUT
-                else
-                  echo "result=false" >> $GITHUB_OUTPUT
-                  echo "Push su release deve provenire da main branch"
-                  exit 1
-                fi
-
   release:
-    needs: check-source
-    if: needs.check-source.outputs.should-continue == 'true'
     name: Build and Release
     runs-on: ${{ matrix.os }}
     strategy:
