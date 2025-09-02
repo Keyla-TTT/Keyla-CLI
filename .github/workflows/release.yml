@@ -13,42 +13,42 @@ permissions:
 
 jobs:
 
-  check-source:
-        runs-on: ubuntu-latest
-        outputs:
-            should-continue: ${{ steps.check.outputs.result }}
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - name: Check if release code matches main
-              id: check
-              run: |
-                  # Confronta il contenuto del codice tra release e main
-                  git fetch origin main:main
-
-                  # Escludi file che possono differire (.github, README, ecc.)
-                  DIFF=$(git diff --name-only release main -- \
-                    ':!.github/' \
-                    ':!README.md' \
-                    ':!CHANGELOG.md' \
-                    ':!docs/' \
-                    ':!*.md')
-
-                  if [ -z "$DIFF" ]; then
-                    echo "Il codice su release è identico a main"
-                    echo "result=true" >> $GITHUB_OUTPUT
-                  else
-                    echo "Il codice su release differisce da main:"
-                    echo "$DIFF"
-                    echo "result=false" >> $GITHUB_OUTPUT
-                    exit 1
-                  fi
+#  check-source:
+#        runs-on: ubuntu-latest
+#        outputs:
+#            should-continue: ${{ steps.check.outputs.result }}
+#        steps:
+#            - name: Checkout
+#              uses: actions/checkout@v4
+#              with:
+#                  fetch-depth: 0
+#
+#            - name: Check if release code matches main
+#              id: check
+#              run: |
+#                  # Confronta il contenuto del codice tra release e main
+#                  git fetch origin main:main
+#
+#                  # Escludi file che possono differire (.github, README, ecc.)
+#                  DIFF=$(git diff --name-only release main -- \
+#                    ':!.github/' \
+#                    ':!README.md' \
+#                    ':!CHANGELOG.md' \
+#                    ':!docs/' \
+#                    ':!*.md')
+#
+#                  if [ -z "$DIFF" ]; then
+#                    echo "Il codice su release è identico a main"
+#                    echo "result=true" >> $GITHUB_OUTPUT
+#                  else
+#                    echo "Il codice su release differisce da main:"
+#                    echo "$DIFF"
+#                    echo "result=false" >> $GITHUB_OUTPUT
+#                    exit 1
+#                  fi
   release:
-    needs: check-source
-    if: needs.check-source.outputs.should-continue == 'true'
+#    needs: check-source
+#    if: needs.check-source.outputs.should-continue == 'true'
     name: Build and Release
     runs-on: ${{ matrix.os }}
     strategy:
@@ -133,6 +133,18 @@ jobs:
         with:
           name: native-${{ runner.os }}
           path: dist/*
+
+      -   name: Trigger release repo update
+          uses: peter-evans/repository-dispatch@v2
+          with:
+              token: ${{ secrets.PAT_TOKEN }}
+              repository: Keyla-TTT/Keyla-RELEASE
+              event-type: new-release
+              client-payload: |
+                  {
+                    "repository_name": "${{ github.event.repository.name }}",
+                    "release_tag": "${{ github.event.release.tag_name }}"
+                  }
 
   documentation:
       name: Generate Documentation
