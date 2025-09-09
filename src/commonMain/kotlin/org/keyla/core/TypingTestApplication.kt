@@ -11,6 +11,7 @@ import org.keyla.ui.profileMode
 import org.keyla.ui.settingsMode
 import org.keyla.ui.statsMode
 import org.keyla.ui.testMode
+import org.keyla.ui.showConnectionErrorAndExit
 
 class TypingTestApplication(
     private val apiServiceFactory: ApiServiceFactory,
@@ -58,8 +59,7 @@ class TypingTestApplication(
                     }
                 }
             } catch (e: Exception) {
-                println("Failed to connect to the backend: ${e.message}")
-                println("Please check if the backend is running and try again.")
+                showConnectionErrorAndExit(platformService)
             } finally {
                 apiServiceFactory.close()
             }
@@ -70,19 +70,13 @@ class TypingTestApplication(
         return try {
             val isConnected = configService.testConnection()
             if (!isConnected) {
-                println("Failed to connect to the backend.")
-                println("Please check if the backend is running and try again.")
-                println("You can change the backend URL by running 'keyla settings'")
-                kotlinx.coroutines.delay(1000)
-                platformService.exitProcess(1)
+                showConnectionErrorAndExit(platformService)
+                return false // This line will never be reached due to exitProcess, but satisfies compiler
             }
             isConnected
         } catch (e: Exception) {
-            println("Failed to connect to the backend: ${e.message}")
-            println("Please check if the backend is running and try again.")
-            println("You can change the backend URL by running 'keyla settings'")
-            kotlinx.coroutines.delay(1000)
-            platformService.exitProcess(1)
+            showConnectionErrorAndExit(platformService)
+            return false // This line will never be reached due to exitProcess, but satisfies compiler
         }
     }
 
@@ -112,9 +106,7 @@ class TypingTestApplication(
                 platformService.exitProcess(1)
             }
         } catch (e: Exception) {
-            println("Failed to connect to the backend: ${e.message}")
-            println("Please check if the backend is running and try again.")
-            platformService.exitProcess(1)
+            showConnectionErrorAndExit(platformService)
         }
     }
 }
