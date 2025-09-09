@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+commit_file=$1
+commit_msg=$(cat "$commit_file")
+
+# Conventional commit pattern
+pattern="^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\([a-z0-9-]+\))?: .+"
+
+if ! echo "$commit_msg" | grep -E "$pattern" > /dev/null; then
+    echo "Error: Commit message does not follow conventional commit format."
+    echo ""
+    echo "Expected format: <type>[optional scope]: <description>"
+    echo ""
+    echo "Valid types:"
+    echo "  • feat:     A new feature"
+    echo "  • fix:      A bug fix"
+    echo "  • docs:     Documentation only changes"
+    echo "  • style:    Changes that do not affect the meaning of the code"
+    echo "  • refactor: A code change that neither fixes a bug nor adds a feature"
+    echo "  • test:     Adding missing tests or correcting existing tests"
+    echo "  • chore:    Changes to the build process or auxiliary tools"
+    echo "  • perf:     A code change that improves performance"
+    echo "  • ci:       Changes to our CI configuration files and scripts"
+    echo "  • build:    Changes that affect the build system or external dependencies"
+    echo "  • revert:   Reverts a previous commit"
+    echo ""
+    echo "Your commit message: \"$commit_msg\""
+    exit 1
+fi
+
+echo "Commit message follows conventional commit format"
+exit 0
