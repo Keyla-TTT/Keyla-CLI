@@ -18,9 +18,12 @@ suspend fun showConnectionErrorAndExit(platformService: org.keyla.core.interface
     platformService.exitProcess(1)
 }
 
-fun getErrorMessage(exception: Exception, context: String): String {
+fun getErrorMessage(
+    exception: Exception,
+    context: String,
+): String {
     val message = exception.message ?: ""
-    
+
     return when {
         isConnectionError(message) -> ErrorMessages.BACKEND_CONNECTION_FAILED
         isHttpError(message, 404) -> ErrorMessages.RESOURCE_NOT_FOUND
@@ -33,21 +36,31 @@ fun getErrorMessage(exception: Exception, context: String): String {
 }
 
 private fun isConnectionError(message: String): Boolean {
-    val connectionErrors = listOf(
-        "Connection refused", "timeout", "ConnectException", 
-        "SocketTimeoutException", "UnknownHostException"
-    )
+    val connectionErrors =
+        listOf(
+            "Connection refused",
+            "timeout",
+            "ConnectException",
+            "SocketTimeoutException",
+            "UnknownHostException",
+        )
     return connectionErrors.any { message.contains(it, ignoreCase = true) }
 }
 
-private fun isHttpError(message: String, code: Int): Boolean {
+private fun isHttpError(
+    message: String,
+    code: Int,
+): Boolean {
     return message.contains(code.toString(), ignoreCase = true)
 }
 
-private fun isConfigKeyError(context: String, message: String): Boolean {
+private fun isConfigKeyError(
+    context: String,
+    message: String,
+): Boolean {
     return context == "updateConfig" && (
         message.contains("404", ignoreCase = true) ||
-        message.contains("not found", ignoreCase = true) ||
-        message.contains("invalid key", ignoreCase = true)
+            message.contains("not found", ignoreCase = true) ||
+            message.contains("invalid key", ignoreCase = true)
     )
 }

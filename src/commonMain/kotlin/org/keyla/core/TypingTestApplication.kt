@@ -9,9 +9,9 @@ import org.keyla.ui.configMode
 import org.keyla.ui.historyMode
 import org.keyla.ui.profileMode
 import org.keyla.ui.settingsMode
+import org.keyla.ui.showConnectionErrorAndExit
 import org.keyla.ui.statsMode
 import org.keyla.ui.testMode
-import org.keyla.ui.showConnectionErrorAndExit
 
 class TypingTestApplication(
     private val apiServiceFactory: ApiServiceFactory,
