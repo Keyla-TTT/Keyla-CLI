@@ -25,7 +25,7 @@ detekt {
 
 group = "org.keyla"
 version = "1.0-SNAPSHOT"
-
+val appName = "keyla"
 repositories {
     mavenCentral()
 }
@@ -35,65 +35,44 @@ dependencies {
 }
 
 tasks.register("installGitHooks") {
-    description = "Install git hooks (pre-commit and commit-msg) compatible with Windows"
+    description = "Install git hooks from scripts folder"
     group = "git hooks"
+
     doLast {
-        // Pre-commit hook
-        val preCommitFile = file("${project.rootDir}/.git/hooks/pre-commit")
-        preCommitFile.parentFile.mkdirs()
-        preCommitFile.writeText(
-            """
-            #!/usr/bin/env sh
-            echo "Running ktlint and detekt checks..."
+        val scriptsDir = file("${project.rootDir}/scripts")
+        val hooksDir = file("${project.rootDir}/.git/hooks")
 
-            # Detect Windows and use appropriate command
-            if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
-                cmd.exe /c gradlew.bat ktlintCheck detekt
-                EXIT_CODE=${'$'}?
-            else
-                ./gradlew ktlintCheck detekt
-                EXIT_CODE=${'$'}?
-            fi
+        if (!scriptsDir.exists()) {
+            throw GradleException("Scripts directory not found at ${scriptsDir.absolutePath}")
+        }
 
-            if [ ${'$'}EXIT_CODE -ne 0 ]; then
-                echo "Pre-commit checks failed. Attempting to auto-format..."
-                if [ -f "./gradlew.bat" ] && [ "${'$'}OSTYPE" = "win32" -o "${'$'}OSTYPE" = "msys" -o "${'$'}OSTYPE" = "cygwin" ]; then
-                    cmd.exe /c gradlew.bat ktlintFormat
-                else
-                    ./gradlew ktlintFormat
-                fi
-                echo "Code has been auto-formatted. Please review and commit again."
-                exit 1
-            else
-                echo "Pre-commit checks passed."
-            fi
-            """.trimIndent(),
-        )
-        preCommitFile.setExecutable(true)
+        hooksDir.mkdirs()
 
-        // Commit-msg hook
-        val commitMsgFile = file("${project.rootDir}/.git/hooks/commit-msg")
-        commitMsgFile.writeText(
-            """
-            #!/usr/bin/env sh
+        // Copy pre-commit hook
+        val preCommitSource = file("$scriptsDir/pre-commit")
+        val preCommitTarget = file("$hooksDir/pre-commit")
 
-            commit_file=${'$'}1
-            commit_msg=$(cat "${'$'}commit_file")
+        if (preCommitSource.exists()) {
+            preCommitSource.copyTo(preCommitTarget, overwrite = true)
+            preCommitTarget.setExecutable(true)
+            println("Installed pre-commit hook")
+        } else {
+            println("Pre-commit hook not found in scripts folder")
+        }
 
-            pattern="^(feat|fix|docs|style|refactor|test|chore)(\([a-z0-9-]+\))?: .+"
+        // Copy commit-msg hook
+        val commitMsgSource = file("$scriptsDir/commit-msg")
+        val commitMsgTarget = file("$hooksDir/commit-msg")
 
-            if ! echo "${'$'}commit_msg" | grep -E "${'$'}pattern" > /dev/null; then
-                echo "Error: Commit message does not follow conventional format."
-                echo "Should start with feat:, fix:, docs:, style:, refactor:, test: or chore:"
-                echo "Example: feat: add new functionality"
-                exit 1
-            fi
-            exit 0
-            """.trimIndent(),
-        )
-        commitMsgFile.setExecutable(true)
+        if (commitMsgSource.exists()) {
+            commitMsgSource.copyTo(commitMsgTarget, overwrite = true)
+            commitMsgTarget.setExecutable(true)
+            println("Installed commit-msg hook")
+        } else {
+            println("Commit-msg hook not found in scripts folder")
+        }
 
-        println("Git hooks installed successfully.")
+        println("Git hooks installation completed!")
     }
 }
 
@@ -151,6 +130,17 @@ tasks.register("fixCode") {
     }
 }
 
+// Task to run pre-commit checks manually
+tasks.register("preCommitCheck") {
+    group = "git hooks"
+    description = "Run the same checks as the pre-commit hook"
+    dependsOn("ktlintCheck", "detekt", "allTests")
+
+    doLast {
+        println("All pre-commit checks passed!")
+    }
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
@@ -172,12 +162,14 @@ kotlin {
         nativeTarget.apply {
             binaries {
                 executable {
-                    entryPoint = "org.keyla.main" // Point to the main function
+                    entryPoint = "org.keyla.main"
                     baseName = "Keyla"
                 }
             }
         }
     }
+
+    kotlin.applyDefaultHierarchyTemplate()
 
     sourceSets {
         val ktorVersion = "2.3.7"
@@ -242,5 +234,3 @@ kotlin {
         }
     }
 }
-
-val appName = "keyla"
