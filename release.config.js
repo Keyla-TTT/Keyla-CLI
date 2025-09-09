@@ -9,7 +9,7 @@ module.exports = {
             {
                 assets: [
                     { path: 'dist/native-Linux/*', label: 'Linux Binary' },
-                    { path: 'dist/native-macOS/*', label: 'macOS ARM64 Binary' },
+                    { path: 'dist/native-macOS/*', label: 'macOS Binaries' },
                     { path: 'dist/native-Windows/*', label: 'Windows Binary' }
                 ]
             }
