@@ -33,7 +33,7 @@ suspend fun handleUpdateConfig(
         updateState(state.copy(successMessage = res.message))
         setScreen(ConfigScreen.Success)
     } catch (e: Exception) {
-        updateState(state.copy(errorMessage = "Update failed, check key or try again"))
+        updateState(state.copy(errorMessage = getErrorMessage(e, "updateConfig")))
         setScreen(ConfigScreen.Error)
     }
 }

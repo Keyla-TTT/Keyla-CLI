@@ -46,7 +46,7 @@ class ConfigServiceImpl(
             val result = httpClient.get(url).status.isSuccess()
             result
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 

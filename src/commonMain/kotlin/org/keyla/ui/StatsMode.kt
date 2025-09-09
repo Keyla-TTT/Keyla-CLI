@@ -26,7 +26,7 @@ suspend fun statsMode(
                     displayNoDataMessage(currentProfile)
                 }
                 else -> {
-                    println("Failed to fetch analytics: ${e.message}")
+                    println("Failed to connect to the backend: ${getErrorMessage(e, "statsMode")}")
                 }
             }
         }

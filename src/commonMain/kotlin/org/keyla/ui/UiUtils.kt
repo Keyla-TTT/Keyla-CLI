@@ -6,9 +6,9 @@ fun getErrorMessage(
 ): String {
     return when {
         exception.message?.contains("Connection refused", ignoreCase = true) == true ->
-            "Unable to connect to the server. Please check if the backend is running and try again."
+            "Failed to connect to the backend. Please check if the backend is running and try again."
         exception.message?.contains("timeout", ignoreCase = true) == true ->
-            "Request timed out. Please check your internet connection and try again."
+            "Failed to connect to the backend. Request timed out. Please check your internet connection and try again."
         exception.message?.contains("404", ignoreCase = true) == true ->
             "The requested resource was not found. Please check your configuration."
         exception.message?.contains("500", ignoreCase = true) == true ->
@@ -36,7 +36,12 @@ fun getErrorMessage(
                 "submitResults" -> "Failed to submit test results. Please try again."
                 "testConnection" -> "Failed to test connection. Please try again."
                 "updateBackendUrl" -> "Failed to update backend URL. Please try again."
-                else -> "An unexpected error occurred. Please try again."
+                "statsMode" -> "Failed to connect to the backend. Please check if the backend is running and try again."
+                "historyMode" -> "Failed to connect to the backend. Please check if the backend is running and try again."
+                "loadTestData" -> "Failed to connect to the backend. Please check if the backend is running and try again."
+                "loadProfiles" -> "Failed to connect to the backend. Please check if the backend is running and try again."
+                "selectProfile" -> "Failed to connect to the backend. Please check if the backend is running and try again."
+                else -> "Failed to connect to the backend. Please check if the backend is running and try again."
             }
     }
 }

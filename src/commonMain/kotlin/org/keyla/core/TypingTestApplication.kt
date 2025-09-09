@@ -58,7 +58,8 @@ class TypingTestApplication(
                     }
                 }
             } catch (e: Exception) {
-                println("Application error: ${e.message}")
+                println("Failed to connect to the backend: ${e.message}")
+                println("Please check if the backend is running and try again.")
             } finally {
                 apiServiceFactory.close()
             }
@@ -67,10 +68,20 @@ class TypingTestApplication(
 
     private suspend fun establishConnection(): Boolean {
         return try {
-            configService.testConnection()
+            val isConnected = configService.testConnection()
+            if (!isConnected) {
+                println("Failed to connect to the backend.")
+                println("Please check if the backend is running and try again.")
+                println("You can change the backend URL by running 'keyla settings'")
+                kotlinx.coroutines.delay(1000)
+                platformService.exitProcess(1)
+            }
+            isConnected
         } catch (e: Exception) {
-            println("Application error: ${e.message}")
-            println("connection failed, try again or change the backend url running 'keyla settings'")
+            println("Failed to connect to the backend: ${e.message}")
+            println("Please check if the backend is running and try again.")
+            println("You can change the backend URL by running 'keyla settings'")
+            kotlinx.coroutines.delay(1000)
             platformService.exitProcess(1)
         }
     }
@@ -101,7 +112,8 @@ class TypingTestApplication(
                 platformService.exitProcess(1)
             }
         } catch (e: Exception) {
-            println("Failed to load initial data: ${e.message}")
+            println("Failed to connect to the backend: ${e.message}")
+            println("Please check if the backend is running and try again.")
             platformService.exitProcess(1)
         }
     }
