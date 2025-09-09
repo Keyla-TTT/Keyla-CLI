@@ -41,7 +41,6 @@ class ApplicationContainerTest {
         val apiServiceFactory = container.getApiServiceFactory()
 
         assertNotNull(apiServiceFactory)
-        assertTrue(apiServiceFactory is org.keyla.api.ApiServiceFactory)
     }
 
     @Test
