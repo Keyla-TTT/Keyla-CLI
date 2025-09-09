@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.1.0...v1.2.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* fix error messages ([6329ce6](https://github.com/Keyla-TTT/Keyla-CLI/commit/6329ce6cf50303cca95ab717abb0477136e148a6))
+* fix error messages ([9f6118c](https://github.com/Keyla-TTT/Keyla-CLI/commit/9f6118c0a0133c2c23777652f9b6a8d24cc72a85))
+* show errors message when connection fails ([676514c](https://github.com/Keyla-TTT/Keyla-CLI/commit/676514caf685e932add61ed7cb2724a8a4649345))
+
+
+### Features
+
+* feature/releaseworkflow ([71e8763](https://github.com/Keyla-TTT/Keyla-CLI/commit/71e8763a965f8cca602c37fb7d63ef497eda5be6))
+* keyla-TTT/develop <- feature/releaseworkflow ([192cd5c](https://github.com/Keyla-TTT/Keyla-CLI/commit/192cd5ca65efda414cfb35b58f29d8bbf0a07045))
+* updating workflows (pull on main -> automatic push on release -> semantic release that at publish time triggers workflow in KeylaRELEASE) ([bbce279](https://github.com/Keyla-TTT/Keyla-CLI/commit/bbce2790998091ee74aea58f00d12f1859cf9350))
+
 # [1.1.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.0.1...v1.1.0) (2025-08-13)
 
 
