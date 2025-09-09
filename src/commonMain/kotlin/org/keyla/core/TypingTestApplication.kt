@@ -9,6 +9,7 @@ import org.keyla.ui.configMode
 import org.keyla.ui.historyMode
 import org.keyla.ui.profileMode
 import org.keyla.ui.settingsMode
+import org.keyla.ui.showConnectionErrorAndExit
 import org.keyla.ui.statsMode
 import org.keyla.ui.testMode
 
@@ -58,7 +59,7 @@ class TypingTestApplication(
                     }
                 }
             } catch (e: Exception) {
-                println("Application error: ${e.message}")
+                showConnectionErrorAndExit(platformService)
             } finally {
                 apiServiceFactory.close()
             }
@@ -67,11 +68,15 @@ class TypingTestApplication(
 
     private suspend fun establishConnection(): Boolean {
         return try {
-            configService.testConnection()
+            val isConnected = configService.testConnection()
+            if (!isConnected) {
+                showConnectionErrorAndExit(platformService)
+                return false // This line will never be reached due to exitProcess, but satisfies compiler
+            }
+            isConnected
         } catch (e: Exception) {
-            println("Application error: ${e.message}")
-            println("connection failed, try again or change the backend url running 'keyla settings'")
-            platformService.exitProcess(1)
+            showConnectionErrorAndExit(platformService)
+            return false // This line will never be reached due to exitProcess, but satisfies compiler
         }
     }
 
@@ -101,8 +106,7 @@ class TypingTestApplication(
                 platformService.exitProcess(1)
             }
         } catch (e: Exception) {
-            println("Failed to load initial data: ${e.message}")
-            platformService.exitProcess(1)
+            showConnectionErrorAndExit(platformService)
         }
     }
 }

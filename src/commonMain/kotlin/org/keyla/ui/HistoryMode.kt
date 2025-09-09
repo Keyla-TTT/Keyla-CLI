@@ -57,7 +57,7 @@ suspend fun historyMode(
                             state.copy(
                                 testHistory = emptyList(),
                                 statistics = emptyList(),
-                                errorMessage = "Failed to load data: ${e.message}",
+                                errorMessage = getErrorMessage(e, "historyMode"),
                             ),
                         )
                     }

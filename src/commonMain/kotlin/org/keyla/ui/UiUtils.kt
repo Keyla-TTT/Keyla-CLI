@@ -1,42 +1,66 @@
 package org.keyla.ui
 
+object ErrorMessages {
+    const val BACKEND_CONNECTION_FAILED = "Failed to connect to the backend. Please check if the backend is running and try again."
+    const val BACKEND_SETTINGS_MESSAGE = "You can change the backend URL by running 'keyla settings'"
+    const val RESOURCE_NOT_FOUND = "The requested resource was not found. Please check your configuration."
+    const val SERVER_ERROR = "Server error occurred. Please try again later."
+    const val AUTHENTICATION_FAILED = "Authentication failed. Please check your credentials."
+    const val ACCESS_DENIED = "Access denied. You don't have permission to perform this action."
+    const val CONFIG_KEY_INVALID = "Failed setting config. Be sure the key exists."
+    const val GENERIC_ERROR = "An error occurred. Please try again."
+}
+
+suspend fun showConnectionErrorAndExit(platformService: org.keyla.core.interfaces.PlatformService) {
+    println(ErrorMessages.BACKEND_CONNECTION_FAILED)
+    println(ErrorMessages.BACKEND_SETTINGS_MESSAGE)
+    kotlinx.coroutines.delay(1000)
+    platformService.exitProcess(1)
+}
+
 fun getErrorMessage(
     exception: Exception,
     context: String,
 ): String {
+    val message = exception.message ?: ""
+
     return when {
-        exception.message?.contains("Connection refused", ignoreCase = true) == true ->
-            "Unable to connect to the server. Please check if the backend is running and try again."
-        exception.message?.contains("timeout", ignoreCase = true) == true ->
-            "Request timed out. Please check your internet connection and try again."
-        exception.message?.contains("404", ignoreCase = true) == true ->
-            "The requested resource was not found. Please check your configuration."
-        exception.message?.contains("500", ignoreCase = true) == true ->
-            "Server error occurred. Please try again later."
-        exception.message?.contains("401", ignoreCase = true) == true ->
-            "Authentication failed. Please check your credentials."
-        exception.message?.contains("403", ignoreCase = true) == true ->
-            "Access denied. You don't have permission to perform this action."
-        context == "updateConfig" && (
-            exception.message?.contains("404", ignoreCase = true) == true ||
-                exception.message?.contains("not found", ignoreCase = true) == true ||
-                exception.message?.contains("invalid key", ignoreCase = true) == true
-        ) ->
-            "Failed setting config. Be sure the key exists."
-        else ->
-            when (context) {
-                "loadDictionaries" -> "Failed to load dictionaries. Please try again."
-                "createTest" -> "Failed to create test. Please try again."
-                "continueLastTest" -> "There is no previous test to continue."
-                "viewTestHistory" -> "Failed to load test history. Please try again."
-                "changeProfile" -> "Failed to load profiles. Please try again."
-                "createProfile" -> "Failed to create profile. Please check your input and try again."
-                "viewAllConfig" -> "Failed to load configuration. Please try again."
-                "updateConfig" -> "Failed to update configuration. Please try again."
-                "submitResults" -> "Failed to submit test results. Please try again."
-                "testConnection" -> "Failed to test connection. Please try again."
-                "updateBackendUrl" -> "Failed to update backend URL. Please try again."
-                else -> "An unexpected error occurred. Please try again."
-            }
+        isConnectionError(message) -> ErrorMessages.BACKEND_CONNECTION_FAILED
+        isHttpError(message, 404) -> ErrorMessages.RESOURCE_NOT_FOUND
+        isHttpError(message, 500) -> ErrorMessages.SERVER_ERROR
+        isHttpError(message, 401) -> ErrorMessages.AUTHENTICATION_FAILED
+        isHttpError(message, 403) -> ErrorMessages.ACCESS_DENIED
+        isConfigKeyError(context, message) -> ErrorMessages.CONFIG_KEY_INVALID
+        else -> ErrorMessages.GENERIC_ERROR
     }
+}
+
+private fun isConnectionError(message: String): Boolean {
+    val connectionErrors =
+        listOf(
+            "Connection refused",
+            "timeout",
+            "ConnectException",
+            "SocketTimeoutException",
+            "UnknownHostException",
+        )
+    return connectionErrors.any { message.contains(it, ignoreCase = true) }
+}
+
+private fun isHttpError(
+    message: String,
+    code: Int,
+): Boolean {
+    return message.contains(code.toString(), ignoreCase = true)
+}
+
+private fun isConfigKeyError(
+    context: String,
+    message: String,
+): Boolean {
+    return context == "updateConfig" && (
+        message.contains("404", ignoreCase = true) ||
+            message.contains("not found", ignoreCase = true) ||
+            message.contains("invalid key", ignoreCase = true)
+    )
 }
