@@ -63,7 +63,7 @@ tasks.register("installGitHooks") {
         // Copy commit-msg hook
         val commitMsgSource = file("$scriptsDir/commit-msg")
         val commitMsgTarget = file("$hooksDir/commit-msg")
-
+        
         if (commitMsgSource.exists()) {
             commitMsgSource.copyTo(commitMsgTarget, overwrite = true)
             commitMsgTarget.setExecutable(true)
@@ -141,6 +141,7 @@ tasks.register("preCommitCheck") {
     }
 }
 
+
 tasks.register("run") {
     group = "application"
     description = "Run the JVM application"
@@ -154,6 +155,7 @@ tasks.register("run") {
         }
     }
 }
+
 
 java {
     toolchain {

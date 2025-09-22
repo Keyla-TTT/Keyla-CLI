@@ -50,6 +50,7 @@ sudo cp keyla-linux /usr/local/bin/keyla
 keyla settings
 ```
 
+
 **Note**: The Linux executable requires the `libcurl` library, which is typically pre-installed on most Linux distributions. If you encounter issues, install it with:
 ```bash
 # Ubuntu/Debian
@@ -363,6 +364,7 @@ src/
 
 This project uses pre-commit and
 commit-msg hooks to ensure code quality and conventional commit messages.
+
 
 #### Install Git Hooks
 ```bash
