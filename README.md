@@ -50,6 +50,19 @@ sudo cp keyla-linux /usr/local/bin/keyla
 keyla settings
 ```
 
+
+**Note**: The Linux executable requires the `libcurl` library, which is typically pre-installed on most Linux distributions. If you encounter issues, install it with:
+```bash
+# Ubuntu/Debian
+sudo apt-get install libcurl4-openssl-dev
+
+# Fedora/RHEL/CentOS
+sudo dnf install libcurl-devel
+
+# Arch Linux
+sudo pacman -S curl
+```
+
 **macOS (Apple Silicon):**
 ```bash
 # Download the latest release
@@ -246,11 +259,97 @@ keyla stats     # View statistics
 - Run `keyla profile` to create or manage profiles
 - Ensure you have an active profile before taking tests
 
+**Linux dependency issues**:
+- If you get library errors on Linux, ensure `libcurl` is installed:
+  ```bash
+  # Ubuntu/Debian
+  sudo apt-get install libcurl4-openssl-dev
+
+  # Fedora/RHEL/CentOS
+  sudo dnf install libcurl-devel
+
+  # Arch Linux
+  sudo pacman -S curl
+  ```
+
 ## Development
 
 ### Prerequisites
 - Java 17+
 - Gradle 8.0+
+- **Linux**: `libcurl4-openssl-dev` and `zlib1g-dev` (for native builds)
+- **macOS**: `curl` (via Homebrew)
+
+### Running the Application for Development
+
+#### JVM (Cross-platform)
+The easiest way to run the application during development is using the JVM target:
+
+```bash
+# Run the JVM application
+./gradlew run
+
+# Run with specific arguments
+./gradlew runJvm -PappArgs="test"
+./gradlew runJvm -PappArgs="settings"
+./gradlew runJvm -PappArgs="config"
+```
+
+#### Native Executables
+
+**Build and run debug executables:**
+```bash
+# Linux
+./gradlew runDebugExecutableLinuxX64
+
+# macOS (Apple Silicon)
+./gradlew runDebugExecutableMacosArm64
+
+# macOS (Intel)
+./gradlew runDebugExecutableMacosX64
+
+# Windows
+./gradlew runDebugExecutableMingwX64
+```
+
+**Build and run release executables:**
+```bash
+# Linux
+./gradlew runReleaseExecutableLinuxX64
+
+# macOS (Apple Silicon)
+./gradlew runReleaseExecutableMacosArm64
+
+# macOS (Intel)
+./gradlew runReleaseExecutableMacosX64
+
+# Windows
+./gradlew runReleaseExecutableMingwX64
+```
+
+**Build only (without running):**
+```bash
+# Build debug executables
+./gradlew linkDebugExecutableLinuxX64
+./gradlew linkDebugExecutableMacosArm64
+./gradlew linkDebugExecutableMacosX64
+./gradlew linkDebugExecutableMingwX64
+
+# Build release executables
+./gradlew linkReleaseExecutableLinuxX64
+./gradlew linkReleaseExecutableMacosArm64
+./gradlew linkReleaseExecutableMacosX64
+./gradlew linkReleaseExecutableMingwX64
+```
+
+#### Executable Locations
+Built executables are located in:
+- **Debug**: `build/bin/{platform}/debugExecutable/Keyla.kexe` (or `.exe` on Windows)
+- **Release**: `build/bin/{platform}/releaseExecutable/Keyla.kexe` (or `.exe` on Windows)
+
+For example:
+- Linux debug: `build/bin/linuxX64/debugExecutable/Keyla.kexe`
+- macOS release: `build/bin/macosArm64/releaseExecutable/Keyla.kexe`
 
 ### Project Structure
 ```
@@ -263,7 +362,9 @@ src/
 
 ### Git Hooks Setup
 
-This project uses pre-commit and commit-msg hooks to ensure code quality and conventional commit messages.
+This project uses pre-commit and
+commit-msg hooks to ensure code quality and conventional commit messages.
+
 
 #### Install Git Hooks
 ```bash

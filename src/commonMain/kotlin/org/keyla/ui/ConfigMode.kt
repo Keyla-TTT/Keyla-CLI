@@ -50,8 +50,17 @@ suspend fun configMode(configService: org.keyla.api.ConfigService) {
 
             section {
                 fun renderHeader(title: String) {
+                    val boxWidth = 64
+                    val titleLength = title.length
+                    val totalPadding = boxWidth - 2 - titleLength
+                    val leftPadding = totalPadding / 2
+                    val rightPadding = totalPadding - leftPadding
+
+                    val leftSpaces = " ".repeat(leftPadding)
+                    val rightSpaces = " ".repeat(rightPadding)
+
                     green { textLine("╔══════════════════════════════════════════════════════════════╗") }
-                    green { textLine("║                    $title                    ║") }
+                    green { textLine("║$leftSpaces$title$rightSpaces║") }
                     green { textLine("╚══════════════════════════════════════════════════════════════╝") }
                     textLine()
                 }
