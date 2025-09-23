@@ -35,18 +35,13 @@ suspend fun statsMode(
 
 private fun displayNoDataMessage(profile: ProfileResponse) {
     println()
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    TYPING STATISTICS                        ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
-    println()
+    printCenteredHeader("TYPING STATISTICS")
 
     println("👤 Profile: ${profile.name} (${profile.email})")
     println("📊 Total Tests Completed: 0")
     println()
 
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    NO DATA AVAILABLE                        ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
+    printCenteredHeader("NO DATA AVAILABLE")
     println()
 
     println("🎯 You haven't completed any typing tests yet!")
@@ -57,9 +52,7 @@ private fun displayNoDataMessage(profile: ProfileResponse) {
     println("   3. Come back here to see your progress")
     println()
 
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    QUICK START                              ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
+    printCenteredHeader("QUICK START")
     println()
     println("🚀 Ready to start? Run: keyla test")
     println()
@@ -70,18 +63,13 @@ private fun displayAnalytics(
     profile: ProfileResponse,
 ) {
     println()
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    TYPING STATISTICS                        ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
-    println()
+    printCenteredHeader("TYPING STATISTICS")
 
     println("👤 Profile: ${profile.name} (${profile.email})")
     println("📊 Total Tests Completed: ${analytics.totalTests}")
     println()
 
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    PERFORMANCE METRICS                      ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
+    printCenteredHeader("PERFORMANCE METRICS")
     println()
 
     println("🏃 Speed (WPM):")
@@ -109,9 +97,7 @@ private fun displayAnalytics(
         println()
     }
 
-    println("╔══════════════════════════════════════════════════════════════╗")
-    println("║                    SUMMARY                                  ║")
-    println("╚══════════════════════════════════════════════════════════════╝")
+    printCenteredHeader("SUMMARY")
     println()
 
     when {

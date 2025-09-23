@@ -141,6 +141,20 @@ tasks.register("preCommitCheck") {
     }
 }
 
+tasks.register("run") {
+    group = "application"
+    description = "Run the JVM application"
+    dependsOn("jvmMainClasses")
+
+    doLast {
+        javaexec {
+            classpath = configurations.getByName("jvmRuntimeClasspath") + files(kotlin.targets.getByName("jvm").compilations.getByName("main").output.classesDirs)
+            mainClass.set("org.keyla.MainKt")
+            args = project.findProperty("appArgs")?.toString()?.split(" ") ?: emptyList()
+        }
+    }
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
@@ -148,7 +162,9 @@ java {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        withJava()
+    }
     listOf(
         // Linux
         linuxX64(),
