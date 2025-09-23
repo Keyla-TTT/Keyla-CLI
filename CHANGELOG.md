@@ -1,3 +1,27 @@
+# [1.2.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.1.0...v1.2.0) (2025-09-23)
+
+
+### Bug Fixes
+
+* fix error messages ([6329ce6](https://github.com/Keyla-TTT/Keyla-CLI/commit/6329ce6cf50303cca95ab717abb0477136e148a6))
+* fix error messages ([9f6118c](https://github.com/Keyla-TTT/Keyla-CLI/commit/9f6118c0a0133c2c23777652f9b6a8d24cc72a85))
+* fix error messages ([6fde37f](https://github.com/Keyla-TTT/Keyla-CLI/commit/6fde37f0fdd668fc3a0a309e7023f04c075d7961))
+* fix error messages ([2dde3aa](https://github.com/Keyla-TTT/Keyla-CLI/commit/2dde3aaf784692d5ec036de067ded0d1c4ea3303))
+* fix pages titles ([c975ba0](https://github.com/Keyla-TTT/Keyla-CLI/commit/c975ba06ca01643b2485449dc99e314c2745f578))
+* format code ([c6d7bf7](https://github.com/Keyla-TTT/Keyla-CLI/commit/c6d7bf7bafbcef839ac7f8d028756d6bde72cb09))
+* Merge pull request [#19](https://github.com/Keyla-TTT/Keyla-CLI/issues/19) from Keyla-TTT/hotfix/errors ([3d61115](https://github.com/Keyla-TTT/Keyla-CLI/commit/3d61115cf8ea1f5ea45249acbc611fa40410d35e))
+* show errors message when connection fails ([676514c](https://github.com/Keyla-TTT/Keyla-CLI/commit/676514caf685e932add61ed7cb2724a8a4649345))
+* show errors message when connection fails ([5554707](https://github.com/Keyla-TTT/Keyla-CLI/commit/555470727774056fa03b00a7046accfeeee79e8f))
+* workflow step: release in main branch ([25942b1](https://github.com/Keyla-TTT/Keyla-CLI/commit/25942b1572d19f5d14e8b5814c2a20f155666959))
+
+
+### Features
+
+* feature/releaseworkflow ([71e8763](https://github.com/Keyla-TTT/Keyla-CLI/commit/71e8763a965f8cca602c37fb7d63ef497eda5be6))
+* keyla-TTT/develop <- feature/releaseworkflow ([192cd5c](https://github.com/Keyla-TTT/Keyla-CLI/commit/192cd5ca65efda414cfb35b58f29d8bbf0a07045))
+* Merge pull request [#18](https://github.com/Keyla-TTT/Keyla-CLI/issues/18) from Keyla-TTT/feature/docs ([b610b2c](https://github.com/Keyla-TTT/Keyla-CLI/commit/b610b2c64d45d9c04b6bb376fb9fc01ee2be2d56))
+* updating workflows (pull on main -> automatic push on release -> semantic release that at publish time triggers workflow in KeylaRELEASE) ([bbce279](https://github.com/Keyla-TTT/Keyla-CLI/commit/bbce2790998091ee74aea58f00d12f1859cf9350))
+
 # [1.1.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.0.1...v1.1.0) (2025-08-13)
 
 
