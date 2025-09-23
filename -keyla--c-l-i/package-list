@@ -366,6 +366,7 @@ $dokka.location:org.keyla.ui/ConfigState/ConfigState/#org.keyla.models.ConfigLis
 $dokka.location:org.keyla.ui/ConfigState/getConfigList/#/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-config-state/get-config-list.html
 $dokka.location:org.keyla.ui/ConfigState/getErrorMessage/#/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-config-state/get-error-message.html
 $dokka.location:org.keyla.ui/ConfigState/getSuccessMessage/#/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-config-state/get-success-message.html
+$dokka.location:org.keyla.ui/ErrorMessages///PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-error-messages/index.html
 $dokka.location:org.keyla.ui/HistoryModeKt///PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-history-mode-kt/index.html
 $dokka.location:org.keyla.ui/HistoryModeKt/historyMode/#org.keyla.api.TestService#org.keyla.api.StatisticsService#org.keyla.models.ProfileResponse?/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-history-mode-kt/history-mode.html
 $dokka.location:org.keyla.ui/HistoryScreen.Error///PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-history-screen/-error/index.html
@@ -454,6 +455,8 @@ $dokka.location:org.keyla.ui/TestState/getSelectedWordCount/#/PointingToDeclarat
 $dokka.location:org.keyla.ui/TestState/getSuccessMessage/#/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-test-state/get-success-message.html
 $dokka.location:org.keyla.ui/UiUtilsKt///PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-ui-utils-kt/index.html
 $dokka.location:org.keyla.ui/UiUtilsKt/getErrorMessage/#kotlin.Exception#kotlin.String/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-ui-utils-kt/get-error-message.html
+$dokka.location:org.keyla.ui/UiUtilsKt/printCenteredHeader/#kotlin.String/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-ui-utils-kt/print-centered-header.html
+$dokka.location:org.keyla.ui/UiUtilsKt/showConnectionErrorAndExit/#org.keyla.core.interfaces.PlatformService/PointingToDeclaration/-keyla--c-l-i/org.keyla.ui/-ui-utils-kt/show-connection-error-and-exit.html
 $dokka.location:org.keyla.util////PointingToDeclaration/-keyla--c-l-i/org.keyla.util/index.html
 $dokka.location:org.keyla.util/FormatUtilsKt///PointingToDeclaration/-keyla--c-l-i/org.keyla.util/-format-utils-kt/index.html
 $dokka.location:org.keyla.util/FormatUtilsKt/format1f/#kotlin.Double/PointingToDeclaration/-keyla--c-l-i/org.keyla.util/-format-utils-kt/format1f.html
