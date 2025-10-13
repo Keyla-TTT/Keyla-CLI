@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.2.0...v1.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* remove error rate ([1cbbf3a](https://github.com/Keyla-TTT/Keyla-CLI/commit/1cbbf3a7c2e6bd1ce3502bada9650bd8535cb28f))
+
 # [1.2.0](https://github.com/Keyla-TTT/Keyla-CLI/compare/v1.1.0...v1.2.0) (2025-09-23)
 
 
