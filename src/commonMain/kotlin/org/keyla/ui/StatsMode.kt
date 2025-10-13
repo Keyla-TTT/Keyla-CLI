@@ -91,12 +91,6 @@ private fun displayAnalytics(
     println("   • Average per Test: ${format1f(analytics.averageErrorsPerTest)}")
     println()
 
-    if (analytics.totalTests > 0) {
-        val errorRate = (analytics.totalErrors.toDouble() / analytics.totalTests) * 100
-        println("📈 Error Rate: ${format1f(errorRate)}%")
-        println()
-    }
-
     printCenteredHeader("SUMMARY")
     println()
 
